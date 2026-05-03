@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit systemd unpacker
+inherit systemd unpacker xdg fcaps
 
 DESCRIPTION="Windscribe GUI tool for Linux"
 HOMEPAGE="https://windscribe.com/guides/linux https://github.com/Windscribe/Desktop-App"
@@ -18,7 +18,7 @@ RESTRICT="mirror strip"
 QA_PREBUILT="opt/windscribe/*"
 
 RDEPEND="
-    acct-group/windscribe
+	acct-group/windscribe
 	app-admin/sudo
 	dev-libs/glib:2
 	media-libs/fontconfig
@@ -41,14 +41,12 @@ RDEPEND="
 	x11-libs/xcb-util-wm
 	x11-themes/hicolor-icon-theme
 "
-DEPEND="${RDEPEND}"
+DEPEND=""
 BDEPEND=""
 
 S="${WORKDIR}"
 
-src_unpack() {
-	unpack_deb ${A}
-}
+FILECAPS=( cap_setgid+ep opt/windscribe/Windscribe )
 
 src_prepare() {
 	default
@@ -70,12 +68,21 @@ src_prepare() {
 }
 
 src_install() {
-	dodir /opt /usr/share /etc
+	dodir /opt /usr/share /etc /etc/windscribe
 
 	cp -a opt/windscribe "${ED}/opt/" || die
 	cp -a usr/share/* "${ED}/usr/share/" || die
-	cp -a usr/polkit-1/* "${ED}/usr/share/polkit-1/" || die
 	cp -a etc/* "${ED}/etc/" || die
+
+	if [[ -d usr/polkit-1 ]]; then
+		cp -a usr/polkit-1/* "${ED}/usr/share/polkit-1/" || die
+	fi
+
+	dosym -r /opt/windscribe/windscribe-cli /usr/bin/windscribe-cli
+
+	echo "linux_deb_x64" > "${ED}/etc/windscribe/platform" || die
+
+	keepdir /var/tmp/windscribe
 
 	insinto "$(systemd_get_systempresetdir)"
 	doins usr/lib/systemd/system-preset/69-windscribe-helper.preset
@@ -84,12 +91,23 @@ src_install() {
 	newinitd windscribe-helper.initd windscribe-helper
 }
 
+pkg_prerm() {
+	if [[ -x "${EROOT}/opt/windscribe/helper" ]]; then
+		ebegin "Resetting MAC addresses via Windscribe helper"
+		"${EROOT}/opt/windscribe/helper" --reset-mac-addresses
+		eend $?
+	fi
+}
+
 pkg_postinst() {
-    einfo "1. Add your user to the group to use the GUI:"
-    einfo "   gpasswd -a <user> windscribe"
-    einfo
-    einfo "2. To enable the background service:"
-    einfo "   systemd: systemctl enable --now windscribe-helper"
-    einfo "   OpenRC: rc-update add windscribe-helper default"
-    einfo
+	xdg_pkg_postinst
+	fcaps_pkg_postinst
+
+	einfo "1. Add your user to the group to use the GUI:"
+	einfo "   gpasswd -a <user> windscribe"
+	einfo
+	einfo "2. To enable the background service:"
+	einfo "   systemd: systemctl enable --now windscribe-helper"
+	einfo "   OpenRC: rc-update add windscribe-helper default"
+	einfo
 }
