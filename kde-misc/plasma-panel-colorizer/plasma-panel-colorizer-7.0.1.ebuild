@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..14} )
 inherit cmake optfeature python-single-r1
 
 DESCRIPTION="Latte-Dock and WM status bar customization features for the KDE Plasma panels"
