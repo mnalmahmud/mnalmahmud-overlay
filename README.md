@@ -1,6 +1,6 @@
 # mnalmahmud-overlay
 
-Muhtasham's personal overlay of Gentoo GNU/Linux ebuilds.
+Muhtasham Nawr's personal overlay of Gentoo GNU/Linux ebuilds.
 
 This overlay may contain packages that are not yet in the official Portage tree,
 newer versions of existing packages, or experimental ebuilds. Quality is not
@@ -17,19 +17,9 @@ emerge --ask app-eselect/eselect-repository
 # Add the overlay
 eselect repository add mnalmahmud-overlay git https://github.com/mnalmahmud/mnalmahmud-overlay.git
 
-# Install emaint (part of portage, likely already present)
-emerge --ask sys-apps/portage
-
-# Sync the overlay (modern — recommended)
+# Sync the overlay
 emaint sync -r mnalmahmud-overlay
-
-# Alternative: sync all repos including this one
-emerge --sync
 ```
-
-> **Note:** `emaint sync` is the modern way to sync a specific repository.
-> `emaint` is bundled with `sys-apps/portage`, so it should already be available.
-> `emerge --sync` also works and will sync all configured repositories.
 
 ## Disclaimer
 
