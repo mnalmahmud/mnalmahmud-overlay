@@ -10,8 +10,6 @@ Issues and pull requests are welcome.
 
 ## Adding the overlay
 
-### Using eselect-repository (recommended)
-
 ```bash
 # Install eselect-repository if not already present
 emerge --ask app-eselect/eselect-repository
@@ -19,28 +17,15 @@ emerge --ask app-eselect/eselect-repository
 # Add the overlay
 eselect repository add mnalmahmud-overlay git https://github.com/mnalmahmud/mnalmahmud-overlay.git
 
-# Sync the overlay
-emerge --sync mnalmahmud-overlay
+# Sync the overlay (modern — recommended)
+emaint sync -r mnalmahmud-overlay
+
+# Alternative: sync all repos including this one
+emerge --sync
 ```
 
-### Using layman
-
-```bash
-# Install layman if not already present
-emerge --ask app-portage/layman
-
-# Add the overlay
-layman -o https://raw.githubusercontent.com/mnalmahmud/mnalmahmud-overlay/main/repositories.xml -f -a mnalmahmud-overlay
-
-# Sync the overlay
-layman -s mnalmahmud-overlay
-```
-
-## Packages
-
-| Package | Description |
-|---------|-------------|
-| *(more packages coming soon)* | |
+> **Note:** `emaint sync` is the modern way to sync a specific repository.
+> `emerge --sync` also works and will sync all configured repositories.
 
 ## Disclaimer
 
