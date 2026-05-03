@@ -82,8 +82,6 @@ src_install() {
 
 	echo "linux_deb_x64" > "${ED}/etc/windscribe/platform" || die
 
-	keepdir /var/tmp/windscribe
-
 	insinto "$(systemd_get_systempresetdir)"
 	doins usr/lib/systemd/system-preset/69-windscribe-helper.preset
 
