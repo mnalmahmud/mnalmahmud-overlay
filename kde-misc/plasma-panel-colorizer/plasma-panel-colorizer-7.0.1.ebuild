@@ -69,5 +69,5 @@ src_install() {
 }
 
 pkg_postinst() {
-	optfeature "take preset preview support" kde-apps/spectacle
+	optfeature "take preset preview support" kde-plasma/spectacle
 }
