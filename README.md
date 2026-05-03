@@ -17,6 +17,9 @@ emerge --ask app-eselect/eselect-repository
 # Add the overlay
 eselect repository add mnalmahmud-overlay git https://github.com/mnalmahmud/mnalmahmud-overlay.git
 
+# Install emaint (part of portage, likely already present)
+emerge --ask sys-apps/portage
+
 # Sync the overlay (modern — recommended)
 emaint sync -r mnalmahmud-overlay
 
@@ -25,6 +28,7 @@ emerge --sync
 ```
 
 > **Note:** `emaint sync` is the modern way to sync a specific repository.
+> `emaint` is bundled with `sys-apps/portage`, so it should already be available.
 > `emerge --sync` also works and will sync all configured repositories.
 
 ## Disclaimer
