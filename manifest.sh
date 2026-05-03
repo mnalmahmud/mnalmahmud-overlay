@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Run "ebuild manifest" on every ebuild in this overlay.
+# Must be run as root (or via sudo) so that ebuild can fetch distfiles.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+find "$SCRIPT_DIR" -name '*.ebuild' | while IFS= read -r ebuild; do
+    echo ">>> manifest: $ebuild"
+    ebuild "$ebuild" manifest
+done
