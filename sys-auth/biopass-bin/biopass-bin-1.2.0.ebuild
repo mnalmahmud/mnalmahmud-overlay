@@ -7,11 +7,14 @@ inherit multilib pam unpacker xdg
 
 DESCRIPTION="Modern, multi-modal biometric authentication"
 HOMEPAGE="https://github.com/TickLabVN/biopass"
-SRC_URI="https://github.com/TickLabVN/biopass/releases/download/${PV}/biopass_${PV}_amd64.deb -> ${P}.deb"
+SRC_URI="
+	amd64? ( https://github.com/TickLabVN/biopass/releases/download/${PV}/biopass_${PV}_amd64.deb -> ${P}-amd64.deb )
+	arm64? ( https://github.com/TickLabVN/biopass/releases/download/${PV}/biopass_${PV}_arm64.deb -> ${P}-arm64.deb )
+"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 
 RESTRICT="strip"
 
@@ -56,6 +59,6 @@ pkg_postinst() {
     einfo "Biopass core binaries are installed."
     einfo ""
     ewarn "ACTION REQUIRED: To use the AI features, you must manually download the models."
-    ewarn "Run the following command as root:"
+    ewarn "Run the following command as root: "
     ewarn "  bash ${EPREFIX}/usr/share/com.ticklab.biopass/download_models.sh"
 }

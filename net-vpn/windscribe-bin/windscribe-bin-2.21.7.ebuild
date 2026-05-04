@@ -7,11 +7,13 @@ inherit systemd unpacker xdg fcaps
 
 DESCRIPTION="Windscribe GUI tool for Linux"
 HOMEPAGE="https://github.com/Windscribe/Desktop-App"
-SRC_URI="https://github.com/Windscribe/Desktop-App/releases/download/v${PV}/windscribe_${PV}_amd64.deb -> ${P}.deb"
-
+SRC_URI="
+	amd64? ( https://github.com/Windscribe/Desktop-App/releases/download/v${PV}/windscribe_${PV}_amd64.deb -> ${P}-amd64.deb )
+	arm64? ( https://github.com/Windscribe/Desktop-App/releases/download/v${PV}/windscribe_${PV}_arm64.deb -> ${P}-arm64.deb )
+"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 
 RESTRICT="mirror strip"
 
@@ -50,7 +52,7 @@ src_install() {
 	dodir /opt
 	cp -a opt/windscribe "${ED}/opt/" || die
     fowners -R root:root /opt/windscribe
-	
+
 	insinto /usr/share
 	doins -r usr/share/*
 	insinto /etc
@@ -64,7 +66,7 @@ src_install() {
 	dosym -r /opt/windscribe/windscribe-cli /usr/bin/windscribe-cli
 
     insinto /etc/windscribe
-    echo "linux_deb_x64" > "${T}/platform" || die
+    echo "$(usex arm64 linux_deb_arm64 linux_deb_x64)" > "${T}/platform" || die
     doins "${T}/platform"
 
 	insinto "$(systemd_get_systempresetdir)"

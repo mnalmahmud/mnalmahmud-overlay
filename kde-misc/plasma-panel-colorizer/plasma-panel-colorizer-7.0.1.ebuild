@@ -1,4 +1,4 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/luisbocanegra/${PN}/archive/v${PV}.tar.gz -> ${P}.ta
 
 LICENSE="GPL-3+"
 SLOT="6"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -59,7 +59,7 @@ src_install() {
 
     local plasmoid_dir="/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer"
     local tools_dir="${ED}${plasmoid_dir}/contents/ui/tools"
-	
+
 	if [[ -d "${tools_dir}" ]]; then
         chmod +x "${tools_dir}"/*.sh || die
 	else
