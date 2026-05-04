@@ -23,14 +23,14 @@ jobs:
 
       # -----------------------------------------------------------------------
       # 2. Detect upstream updates and copy ebuilds
-      #    Runs entirely on the ubuntu-latest runner (bash + curl + python3).
+      #    Runs entirely on the ubuntu-latest runner (python3 stdlib only).
       #    Records bumped package dirs to BUMPED_PACKAGES_FILE for later steps.
       # -----------------------------------------------------------------------
       - name: Detect and copy updated ebuilds
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUMPED_PACKAGES_FILE: ${{ runner.temp }}/bumped_packages.txt
-        run: bash scripts/auto-ebuild-bump.sh
+        run: python3 scripts/auto-ebuild-bump.py
 
       # -----------------------------------------------------------------------
       # 3. Regenerate Manifests inside a Gentoo container
