@@ -5,6 +5,6 @@ EAPI=8
 
 inherit acct-group
 
-DESCRIPTION="Group for Windscribe"
+DESCRIPTION="Group for net-vpn/windscribe-bin"
 ACCT_GROUP_NAME="windscribe"
 ACCT_GROUP_ID="-1"

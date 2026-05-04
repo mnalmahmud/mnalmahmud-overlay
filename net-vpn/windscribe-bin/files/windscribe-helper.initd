@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+
+name="Windscribe Helper"
+description="Windscribe VPN Background Service"
+command="/opt/windscribe/helper"
+command_background="true"
+pidfile="/run/windscribe-helper.pid"
+
+depend() {
+	need net
+	use dns
+}

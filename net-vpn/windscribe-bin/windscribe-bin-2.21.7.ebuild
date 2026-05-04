@@ -6,8 +6,8 @@ EAPI=8
 inherit systemd unpacker xdg fcaps
 
 DESCRIPTION="Windscribe GUI tool for Linux"
-HOMEPAGE="https://windscribe.com/guides/linux https://github.com/Windscribe/Desktop-App"
-SRC_URI="https://github.com/Windscribe/Desktop-App/releases/download/v${PV}/windscribe_${PV}_amd64.deb"
+HOMEPAGE="https://github.com/Windscribe/Desktop-App"
+SRC_URI="https://github.com/Windscribe/Desktop-App/releases/download/v${PV}/windscribe_${PV}_amd64.deb -> ${P}.deb"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -41,52 +41,37 @@ RDEPEND="
 	x11-libs/xcb-util-wm
 	x11-themes/hicolor-icon-theme
 "
-DEPEND=""
-BDEPEND=""
 
 S="${WORKDIR}"
 
 FILECAPS=( cap_setgid+ep opt/windscribe/Windscribe )
 
-src_prepare() {
-	default
-
-	cat <<- 'EOF' > windscribe-helper.initd
-		#!/sbin/openrc-run
-
-		name="Windscribe Helper"
-		description="Windscribe VPN Background Service"
-		command="/opt/windscribe/helper"
-		command_background="true"
-		pidfile="/run/windscribe-helper.pid"
-
-		depend() {
-			need net
-			use dns
-		}
-	EOF
-}
-
 src_install() {
-	dodir /opt /usr/share /etc /etc/windscribe
-
+	dodir /opt
 	cp -a opt/windscribe "${ED}/opt/" || die
-	cp -a usr/share/* "${ED}/usr/share/" || die
-	cp -a etc/* "${ED}/etc/" || die
+    fowners -R root:root /opt/windscribe
+	
+	insinto /usr/share
+	doins -r usr/share/*
+	insinto /etc
+	doins -r etc/*
 
-	if [[ -d usr/polkit-1 ]]; then
-		cp -a usr/polkit-1/* "${ED}/usr/share/polkit-1/" || die
+	if [[ -d usr/polkit-1/actions ]]; then
+		insinto /usr/share/polkit-1/actions
+		doins usr/polkit-1/actions/*
 	fi
 
 	dosym -r /opt/windscribe/windscribe-cli /usr/bin/windscribe-cli
 
-	echo "linux_deb_x64" > "${ED}/etc/windscribe/platform" || die
+    insinto /etc/windscribe
+    echo "linux_deb_x64" > "${T}/platform" || die
+    doins "${T}/platform"
 
 	insinto "$(systemd_get_systempresetdir)"
 	doins usr/lib/systemd/system-preset/69-windscribe-helper.preset
 
 	systemd_dounit usr/lib/systemd/system/windscribe-helper.service
-	newinitd windscribe-helper.initd windscribe-helper
+	newinitd "${FILESDIR}/windscribe-helper.initd" windscribe-helper
 }
 
 pkg_prerm() {

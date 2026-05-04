@@ -3,17 +3,16 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake ecm
 
 DESCRIPTION="A modern fullscreen application launcher for KDE Plasma"
 HOMEPAGE="https://github.com/xarbit/plasma6-applet-appgrid"
 SRC_URI="https://github.com/xarbit/plasma6-applet-appgrid/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
-SLOT="0"
+SLOT="6"
 KEYWORDS="~amd64"
 
-# Mapped directly from the AUR PKGBUILD depends array
 DEPEND="
 	dev-qt/qtbase:6
 	dev-qt/qtdeclarative:6
@@ -31,12 +30,10 @@ DEPEND="
 	kde-plasma/libplasma:6
 "
 
-# RDEPEND requires the same libraries plus the workspace itself
 RDEPEND="${DEPEND}
 	kde-plasma/plasma-workspace:6
 "
 
-# Mapped from makedepends
 BDEPEND="
 	kde-frameworks/extra-cmake-modules:0
 "

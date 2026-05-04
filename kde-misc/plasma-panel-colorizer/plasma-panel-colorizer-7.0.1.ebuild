@@ -4,6 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..14} )
+
 inherit cmake optfeature python-single-r1
 
 DESCRIPTION="Latte-Dock and WM status bar customization features for the KDE Plasma panels"
@@ -16,13 +17,13 @@ KEYWORDS="~amd64"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-# Note: libplasma is required for Plasma 6
 DEPEND="
 	kde-plasma/libplasma:6
 "
 RDEPEND="
 	${DEPEND}
 	${PYTHON_DEPS}
+	kde-plasma/plasma-workspace:6
 	$(python_gen_cond_dep '
 		dev-python/dbus-python[${PYTHON_USEDEP}]
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
@@ -41,7 +42,6 @@ pkg_setup() {
 src_prepare() {
 	cmake_src_prepare
 
-	# Generate i18n files using the provided python script before configuring
 	einfo "Generating i18n files..."
 	${EPYTHON} ./kpac i18n --no-merge || die "i18n generation failed"
 }
@@ -57,15 +57,16 @@ src_configure() {
 src_install() {
 	cmake_src_install
 
-	# Set execution permissions for the UI tools
-	local tools_dir="${ED}/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools"
+    local plasmoid_dir="/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer"
+    local tools_dir="${ED}${plasmoid_dir}/contents/ui/tools"
 	
 	if [[ -d "${tools_dir}" ]]; then
-		fperms 755 /usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools/list_presets.sh
-		fperms 755 /usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools/gdbus_get_signal.sh
+        chmod +x "${tools_dir}"/*.sh || die
 	else
 		ewarn "Tools directory not found, skipping permission changes."
 	fi
+	python_fix_shebang "${ED}${plasmoid_dir}"
+	python_optimize "${ED}${plasmoid_dir}"
 }
 
 pkg_postinst() {
