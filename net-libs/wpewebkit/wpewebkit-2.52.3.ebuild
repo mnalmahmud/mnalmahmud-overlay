@@ -39,12 +39,12 @@ IUSE="+systemd doc minibrowser"
 BDEPEND="
 	${PYTHON_DEPS}
 	dev-lang/ruby
-	dev-util/cmake
+	dev-build/cmake
+	dev-build/ninja
+	dev-libs/wayland-protocols
 	doc? ( dev-util/gi-docgen )
 	dev-util/gperf
-	dev-util/ninja
 	dev-util/unifdef
-	dev-util/wayland-protocols
 	sys-devel/bison
 	sys-devel/flex
 "
