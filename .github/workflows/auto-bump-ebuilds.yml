@@ -1,0 +1,98 @@
+name: Auto Ebuild Bump
+
+# Run on a weekly schedule and allow manual triggers.
+on:
+  schedule:
+    - cron: "0 12 * * 5" # Every Friday at 12:00 PM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect and copy updated ebuilds
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          BUMPED_PACKAGES_FILE: ${{ runner.temp }}/bumped_packages.txt
+        run: python3 scripts/bump-ebuilds.py
+
+      # -----------------------------------------------------------------------
+      # 3. Regenerate Manifests inside a Gentoo container
+      #    For each bumped package, run "ebuild <newest> manifest" inside a
+      #    gentoo/stage3 container so that portage tooling is available.
+      #    The workspace is mounted at /overlay; emerge-webrsync fetches the
+      #    portage tree (eclasses) before running ebuild.
+      # -----------------------------------------------------------------------
+      - name: Regenerate Manifests (Gentoo container)
+        env:
+          BUMPED_PACKAGES_FILE: ${{ runner.temp }}/bumped_packages.txt
+        run: |
+          if [[ ! -f "$BUMPED_PACKAGES_FILE" ]]; then
+            echo "No packages were bumped – skipping manifest regeneration."
+            exit 0
+          fi
+
+          # Build a space-separated list of relative package directories.
+          rel_dirs=""
+          while IFS= read -r pkg_dir; do
+            rel="${pkg_dir#$GITHUB_WORKSPACE/}"
+            rel_dirs="${rel_dirs} ${rel}"
+          done < "$BUMPED_PACKAGES_FILE"
+          rel_dirs="${rel_dirs# }"   # trim leading space
+
+          echo "Packages to manifest: ${rel_dirs}"
+
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/overlay" \
+            -e "REL_DIRS=${rel_dirs}" \
+            gentoo/stage3:latest \
+            bash -c '
+              set -euo pipefail
+
+              echo "==> Syncing portage tree (emerge-webrsync) …"
+              emerge-webrsync -q
+
+              echo "==> Configuring overlay …"
+              mkdir -p /etc/portage/repos.conf
+              printf "[overlay]\nlocation = /overlay\nmasters = gentoo\nauto-sync = no\n" \
+                > /etc/portage/repos.conf/overlay.conf
+
+              echo "==> Regenerating Manifests …"
+              for rel in $REL_DIRS; do
+                newest=""
+                while IFS= read -r f; do
+                  newest="$f"
+                done < <(printf '%s\n' "/overlay/${rel}"/*.ebuild 2>/dev/null | sort -V)
+                if [[ -z "$newest" || ! -f "$newest" ]]; then
+                  echo "  WARNING: no ebuild found in /overlay/${rel}" >&2
+                  continue
+                fi
+                echo "  ebuild manifest: ${newest}"
+                FEATURES="-sandbox -usersandbox" ebuild "$newest" manifest
+              done
+            '
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "auto-bump: update ebuild versions"
+          branch: auto-bump-ebuilds
+          delete-branch: true
+          title: "auto-bump: update ebuild versions"
+          body: |
+            Automated ebuild version bumps based on upstream releases/tags.
+            Supported sources: GitHub, GitLab, AUR, Debian (packages.debian.org).
+
+            This pull request was opened automatically by the
+            [`auto-bump-ebuilds`](.github/workflows/auto-bump-ebuilds.yml) workflow.
+          labels: auto-bump
