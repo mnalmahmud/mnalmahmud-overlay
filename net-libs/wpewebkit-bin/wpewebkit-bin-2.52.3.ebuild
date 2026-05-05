@@ -37,7 +37,7 @@ LICENSE="
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
 RESTRICT="mirror strip"
-
+QA_PREBUILT="usr/lib*/*"
 RDEPEND="
     app-accessibility/at-spi2-core:2
 	dev-db/sqlite:3
@@ -82,7 +82,6 @@ RDEPEND="
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
 "
-DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
 

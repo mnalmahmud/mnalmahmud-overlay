@@ -308,7 +308,6 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
     pkg_name = pkg_dir.name
     rel_path = pkg_dir.relative_to(OVERLAY_DIR)
 
-    # ---- Find the highest-versioned ebuild ----------------------------------
     ebuilds = sorted(pkg_dir.glob(f"{pkg_name}-*.ebuild"), key=lambda p: _version_key(p.stem[len(pkg_name) + 1:]))
     if not ebuilds:
         return
@@ -327,7 +326,6 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
         return
     info(f"upstream: {source_type}:{upstream_id}")
 
-    # ---- Fetch upstream version (dispatch by source type) -------------------
     upstream_tag = ""
     upstream_pv  = ""
     has_v_prefix = False
@@ -371,12 +369,10 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
     
     info(f"upstream tag: {upstream_tag}  →  PV: {upstream_pv}")
 
-    # ---- Compare versions ---------------------------------------------------
     if not version_gt(upstream_pv, current_pv):
         ok(f"{pkg_name} is already at {current_pv} (upstream: {upstream_pv})")
         return
 
-    # ---- Bump: copy ebuild to new version -----------------------------------
     new_ebuild = pkg_dir / f"{pkg_name}-{upstream_pv}.ebuild"
     if new_ebuild.exists():
         skip(f"{new_ebuild.name} already exists – not overwriting")
@@ -387,16 +383,11 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
         fh.write(str(pkg_dir) + "\n")
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
 def main() -> None:
     github_token = os.environ.get("GITHUB_TOKEN", "")
     gitlab_token = os.environ.get("GITLAB_TOKEN", "")
     bumped_file = os.environ.get("BUMPED_PACKAGES_FILE", "/tmp/bumped_packages.txt")
 
-    # Remove stale bumped-packages file
     try:
         os.remove(bumped_file)
     except FileNotFoundError:
