@@ -57,13 +57,12 @@ src_configure() {
 src_install() {
 	cmake_src_install
 
-	# Set execution permissions for the UI tools
+	# Make all shell tools in the plasmoid executable.
+	# Using find+chmod so any tools added in future upstream releases
+	# are automatically covered.
 	local tools_dir="${ED}/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools"
-	local tools_path="/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools"
-
 	if [[ -d "${tools_dir}" ]]; then
-		fperms 755 "${tools_path}/list_presets.sh"
-		fperms 755 "${tools_path}/gdbus_get_signal.sh"
+		find "${tools_dir}" -name '*.sh' -exec chmod 0755 {} + || die
 	else
 		ewarn "Tools directory not found, skipping permission changes."
 	fi

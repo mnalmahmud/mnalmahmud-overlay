@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit unpacker xdg-utils
+inherit unpacker xdg
 
 DESCRIPTION="Modern, multi-modal biometric authentication (Binary Release)"
 HOMEPAGE="https://github.com/TickLabVN/biopass"
@@ -42,8 +42,9 @@ src_install() {
 
     exeinto "/usr/$(get_libdir)/biopass"
     for libfile in usr/lib/biopass/*; do
-        [[ "${libfile}" == usr/lib/biopass/libbiopass_*.so ]] && \
+        if [[ "${libfile}" == usr/lib/biopass/libbiopass_*.so ]]; then
             patchelf --set-rpath "/usr/$(get_libdir)/biopass" "${libfile}" || die
+        fi
         doexe "${libfile}"
     done
 
@@ -58,8 +59,7 @@ src_install() {
 }
 
 pkg_postinst() {
-    xdg_desktop_database_update
-    xdg_icon_cache_update
+    xdg_pkg_postinst
 
     einfo "Updating dynamic linker cache..."
     /sbin/ldconfig
