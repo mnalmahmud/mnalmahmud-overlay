@@ -34,7 +34,7 @@ LICENSE="
 "
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
-IUSE="+systemd doc minibrowser"
+IUSE="+systemd doc minibrowser sysprof"
 
 BDEPEND="
 	${PYTHON_DEPS}
@@ -93,7 +93,9 @@ RDEPEND="
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+    sysprof? ( dev-util/sysprof-capture:4 )
+"
 
 pkg_setup() {
 	python-any-r1_pkg_setup
@@ -112,6 +114,7 @@ src_configure() {
 		-DENABLE_SPEECH_SYNTHESIS=OFF
 		-DUSE_FLITE=OFF
 		-DUSE_LIBBACKTRACE=OFF
+		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof)
 	)
 
 	cmake_src_configure
