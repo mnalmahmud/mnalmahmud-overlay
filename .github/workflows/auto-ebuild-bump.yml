@@ -90,7 +90,26 @@ jobs:
             '
 
       # -----------------------------------------------------------------------
-      # 4. Open / update a pull request with all bumped ebuilds + Manifests
+      # 4. Read bumped packages list for the PR body
+      # -----------------------------------------------------------------------
+      - name: Read bumped packages
+        id: read_bumped
+        env:
+          BUMPED_PACKAGES_FILE: ${{ runner.temp }}/bumped_packages.txt
+        run: |
+          if [[ -f "$BUMPED_PACKAGES_FILE" ]]; then
+            content=$(cat "$BUMPED_PACKAGES_FILE")
+          else
+            content="(none)"
+          fi
+          {
+            echo "packages<<EOF"
+            echo "$content"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      # -----------------------------------------------------------------------
+      # 5. Open / update a pull request with all bumped ebuilds + Manifests
       # -----------------------------------------------------------------------
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
@@ -106,4 +125,10 @@ jobs:
 
             This pull request was opened automatically by the
             [`auto-ebuild-bump`](.github/workflows/auto-ebuild-bump.yml) workflow.
+
+            ### Bumped packages
+
+            ```
+            ${{ steps.read_bumped.outputs.packages }}
+            ```
           labels: auto-bump
