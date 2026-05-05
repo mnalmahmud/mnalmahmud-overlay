@@ -29,6 +29,7 @@ jobs:
       - name: Detect and copy updated ebuilds
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           BUMPED_PACKAGES_FILE: ${{ runner.temp }}/bumped_packages.txt
         run: python3 scripts/auto-ebuild-bump.py
 
