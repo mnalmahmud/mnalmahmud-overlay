@@ -59,10 +59,11 @@ src_install() {
 
 	# Set execution permissions for the UI tools
 	local tools_dir="${ED}/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools"
-	
+	local tools_path="/usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools"
+
 	if [[ -d "${tools_dir}" ]]; then
-		fperms 755 /usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools/list_presets.sh
-		fperms 755 /usr/share/plasma/plasmoids/luisbocanegra.panel.colorizer/contents/ui/tools/gdbus_get_signal.sh
+		fperms 755 "${tools_path}/list_presets.sh"
+		fperms 755 "${tools_path}/gdbus_get_signal.sh"
 	else
 		ewarn "Tools directory not found, skipping permission changes."
 	fi

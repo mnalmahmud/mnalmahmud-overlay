@@ -37,13 +37,13 @@ src_unpack() {
 src_install() {
     dobin usr/bin/biopass
 
-    patchelf --set-rpath "/usr/$(get_libdir)/biopass" usr/bin/biopass-helper
+    patchelf --set-rpath "/usr/$(get_libdir)/biopass" usr/bin/biopass-helper || die
     dobin usr/bin/biopass-helper
 
     exeinto "/usr/$(get_libdir)/biopass"
     for libfile in usr/lib/biopass/*; do
         [[ "${libfile}" == usr/lib/biopass/libbiopass_*.so ]] && \
-            patchelf --set-rpath "/usr/$(get_libdir)/biopass" "${libfile}"
+            patchelf --set-rpath "/usr/$(get_libdir)/biopass" "${libfile}" || die
         doexe "${libfile}"
     done
 

@@ -51,7 +51,7 @@ FILECAPS=( cap_setgid+ep opt/windscribe/Windscribe )
 src_prepare() {
 	default
 
-	cat <<- 'EOF' > windscribe-helper.initd
+	cat <<- 'EOF' > windscribe-helper.initd || die "Failed to create OpenRC init script"
 		#!/sbin/openrc-run
 
 		name="Windscribe Helper"
