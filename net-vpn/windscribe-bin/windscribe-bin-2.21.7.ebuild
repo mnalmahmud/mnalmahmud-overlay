@@ -14,11 +14,8 @@ SRC_URI="
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
-
 RESTRICT="mirror strip"
-
 QA_PREBUILT="opt/windscribe/*"
-
 RDEPEND="
 	acct-group/windscribe
 	app-admin/sudo
@@ -43,9 +40,7 @@ RDEPEND="
 	x11-libs/xcb-util-wm
 	x11-themes/hicolor-icon-theme
 "
-
 S="${WORKDIR}"
-
 FILECAPS=( cap_setgid+ep opt/windscribe/Windscribe )
 
 src_install() {

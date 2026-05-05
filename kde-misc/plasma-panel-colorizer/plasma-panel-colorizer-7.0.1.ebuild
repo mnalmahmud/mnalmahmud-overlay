@@ -10,13 +10,11 @@ inherit cmake optfeature python-single-r1
 DESCRIPTION="Latte-Dock and WM status bar customization features for the KDE Plasma panels"
 HOMEPAGE="https://github.com/luisbocanegra/plasma-panel-colorizer"
 SRC_URI="https://github.com/luisbocanegra/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-
 LICENSE="GPL-3+"
 SLOT="6"
 KEYWORDS="~amd64 ~arm64"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
 DEPEND="
 	kde-plasma/libplasma:6
 "
