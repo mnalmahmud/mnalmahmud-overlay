@@ -73,7 +73,7 @@ RDEPEND="
 	media-libs/woff2
 	net-libs/libsoup:3.0
 	sys-apps/bubblewrap
-	|| ( sys-apps/systemd sys-auth/elogind )
+	|| ( sys-apps/systemd sys-apps/systemd-utils )
 	sys-apps/xdg-dbus-proxy
 	sys-devel/gcc
 	sys-libs/libseccomp
@@ -95,6 +95,9 @@ src_install() {
     fi
 
     if [[ -d "usr/share" ]]; then
+        # Remove debian docs
+        rm -rf "usr/share/doc/libwpewebkit-2.0-1"
+
         insinto /usr/share
         doins -r usr/share/*
     fi
