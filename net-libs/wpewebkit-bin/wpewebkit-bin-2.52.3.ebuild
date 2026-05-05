@@ -75,7 +75,7 @@ RDEPEND="
 	sys-apps/bubblewrap
 	|| ( sys-apps/systemd sys-apps/systemd-utils[systemd] )
 	sys-apps/xdg-dbus-proxy
-	sys-libs/gcc-libs
+	sys-devel/gcc
 	sys-libs/libseccomp
 	sys-libs/zlib
 	x11-libs/cairo

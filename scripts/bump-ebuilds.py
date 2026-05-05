@@ -329,7 +329,7 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
     upstream_tag = ""
     upstream_pv  = ""
     has_v_prefix = False
-    
+
     match source_type:
         case "github":
             has_v_prefix, prefer_releases = detect_flags(src_uri_line)
@@ -339,7 +339,7 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
             if not upstream_tag:
                 info("querying GitHub tags …")
                 upstream_tag = latest_stable_tag(upstream_id, github_token)
-    
+
         case "gitlab":
             has_v_prefix, prefer_releases = detect_flags(src_uri_line)
             if prefer_releases:
@@ -348,15 +348,15 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
             if not upstream_tag:
                 info("querying GitLab tags …")
                 upstream_tag = latest_gitlab_tag(upstream_id, gitlab_token)
-    
+
         case "aur":
             info("querying AUR …")
             upstream_tag = latest_aur_version(upstream_id)
-    
+
         case "debian":
             info("querying Debian tracker …")
             upstream_tag = latest_debian_version(upstream_id)
-    
+
         case _:
             skip(f"Unknown source type: {source_type}")
             return
@@ -366,7 +366,7 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
         return
 
     upstream_pv = upstream_tag.removeprefix("v") if has_v_prefix else upstream_tag
-    
+
     info(f"upstream tag: {upstream_tag}  →  PV: {upstream_pv}")
 
     if not version_gt(upstream_pv, current_pv):
