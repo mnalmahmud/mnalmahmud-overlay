@@ -55,27 +55,29 @@ def err(msg):   print(f"[bump]   ERROR {msg}", file=sys.stderr, flush=True)
 def http_get_json(url: str) -> dict | list:
     """Fetch *url* with a plain GET and return the parsed JSON (no auth)."""
     req = urllib.request.Request(url, headers={"User-Agent": "auto-ebuild-bump/1.0"})
-    with urllib.request.urlopen(req) as resp:
+    with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
 
 
 def github_get(url: str, token: str) -> dict | list:
     """Fetch *url* from the GitHub API and return the parsed JSON object."""
-    headers = {"Accept": "application/vnd.github.v3+json"}
+    headers = {"Accept": "application/vnd.github.v3+json",
+               "User-Agent": "auto-ebuild-bump/1.0"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
     req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req) as resp:
+    with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
 
 
 def gitlab_get(url: str, token: str) -> dict | list:
     """Fetch *url* from the GitLab API and return the parsed JSON object."""
-    headers = {"Accept": "application/json"}
+    headers = {"Accept": "application/json",
+               "User-Agent": "auto-ebuild-bump/1.0"}
     if token:
         headers["PRIVATE-TOKEN"] = token
     req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req) as resp:
+    with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
 
 
@@ -149,15 +151,18 @@ def detect_upstream(homepage: str, src_uri: str) -> tuple[str, str]:
     return ("", "")
 
 
-def detect_flags(content: str) -> tuple[bool, bool]:
+def detect_flags(src_uri: str) -> tuple[bool, bool]:
     """
-    Return (has_v_prefix, prefer_releases).
+    Return (has_v_prefix, prefer_releases) by inspecting the SRC_URI value.
 
     has_v_prefix    – SRC_URI contains the literal token v${PV}
     prefer_releases – SRC_URI uses a releases download URL (GitHub or GitLab)
+
+    Accepts the already-extracted SRC_URI line(s) rather than the full ebuild
+    content so that comments elsewhere in the file cannot produce false positives.
     """
-    has_v_prefix = 'v${PV}' in content
-    prefer_releases = '/releases/download/' in content or '/-/releases/' in content
+    has_v_prefix = 'v${PV}' in src_uri
+    prefer_releases = '/releases/download/' in src_uri or '/-/releases/' in src_uri
     return has_v_prefix, prefer_releases
 
 
@@ -165,7 +170,11 @@ def detect_flags(content: str) -> tuple[bool, bool]:
 # Version helpers
 # ---------------------------------------------------------------------------
 
-_PRERELEASE_RE = re.compile(r'(rc|beta|alpha|pre|preview)([._-]?\d*|$)', re.I)
+# Matches a pre-release keyword only when it is NOT embedded inside a longer word
+# (e.g. "prebuilt" or "comprehensive" must not be caught).
+# Lookahead/lookbehind require the keyword to be bordered by a non-alpha character
+# or start/end of string on each side.
+_PRERELEASE_RE = re.compile(r'(?<![a-zA-Z])(rc|beta|alpha|pre|preview)(?![a-zA-Z])', re.I)
 
 
 def _version_key(v: str) -> list:
@@ -191,7 +200,7 @@ def latest_release(repo: str, token: str) -> str:
     url = f"{GITHUB_API}/repos/{repo}/releases/latest"
     try:
         data = github_get(url, token)
-    except urllib.error.HTTPError:
+    except (urllib.error.HTTPError, urllib.error.URLError):
         return ""
     if data.get("prerelease"):
         return ""
@@ -207,7 +216,7 @@ def latest_stable_tag(repo: str, token: str) -> str:
     url = f"{GITHUB_API}/repos/{repo}/tags?per_page=100"
     try:
         tags = github_get(url, token)
-    except urllib.error.HTTPError:
+    except (urllib.error.HTTPError, urllib.error.URLError):
         return ""
     names = [t["name"] for t in tags]
     stable = [n for n in names if not _PRERELEASE_RE.search(n)]
@@ -232,7 +241,7 @@ def latest_gitlab_release(repo: str, token: str) -> str:
     url = f"{GITLAB_API}/projects/{encoded}/releases?per_page=20"
     try:
         releases = gitlab_get(url, token)
-    except urllib.error.HTTPError:
+    except (urllib.error.HTTPError, urllib.error.URLError):
         return ""
     for rel in releases:
         tag = rel.get("tag_name", "")
@@ -249,7 +258,7 @@ def latest_gitlab_tag(repo: str, token: str) -> str:
     url = f"{GITLAB_API}/projects/{encoded}/repository/tags?per_page=100&order_by=version"
     try:
         tags = gitlab_get(url, token)
-    except urllib.error.HTTPError:
+    except (urllib.error.HTTPError, urllib.error.URLError):
         return ""
     names = [t["name"] for t in tags]
     stable = [n for n in names if not _PRERELEASE_RE.search(n)]
@@ -333,7 +342,7 @@ def latest_debian_version(pkg: str) -> str:
 # Per-package processing
 # ---------------------------------------------------------------------------
 
-def process_package(pkg_dir: Path, token: str, bumped_file: str) -> None:
+def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_file: str) -> None:
     pkg_name = pkg_dir.name
     rel_path = pkg_dir.relative_to(OVERLAY_DIR)
 
@@ -363,21 +372,20 @@ def process_package(pkg_dir: Path, token: str, bumped_file: str) -> None:
     upstream_pv  = ""
 
     if source_type == "github":
-        has_v_prefix, prefer_releases = detect_flags(content)
+        has_v_prefix, prefer_releases = detect_flags(src_uri_line)
         if prefer_releases:
             info("querying GitHub releases/latest …")
-            upstream_tag = latest_release(upstream_id, token)
+            upstream_tag = latest_release(upstream_id, github_token)
         if not upstream_tag:
             info("querying GitHub tags …")
-            upstream_tag = latest_stable_tag(upstream_id, token)
+            upstream_tag = latest_stable_tag(upstream_id, github_token)
         if not upstream_tag:
             skip(f"could not determine upstream version for {pkg_name}")
             return
         upstream_pv = upstream_tag[1:] if (has_v_prefix and upstream_tag.startswith("v")) else upstream_tag
 
     elif source_type == "gitlab":
-        gitlab_token = os.environ.get("GITLAB_TOKEN", "")
-        has_v_prefix, prefer_releases = detect_flags(content)
+        has_v_prefix, prefer_releases = detect_flags(src_uri_line)
         if prefer_releases:
             info("querying GitLab releases …")
             upstream_tag = latest_gitlab_release(upstream_id, gitlab_token)
@@ -414,6 +422,9 @@ def process_package(pkg_dir: Path, token: str, bumped_file: str) -> None:
 
     # ---- Bump: copy ebuild to new version -----------------------------------
     new_ebuild = pkg_dir / f"{pkg_name}-{upstream_pv}.ebuild"
+    if new_ebuild.exists():
+        skip(f"{new_ebuild.name} already exists – not overwriting")
+        return
     bump(f"{pkg_name}: {current_pv} → {upstream_pv}")
     shutil.copy2(latest_ebuild, new_ebuild)
     with open(bumped_file, "a") as fh:
@@ -425,7 +436,8 @@ def process_package(pkg_dir: Path, token: str, bumped_file: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    token = os.environ.get("GITHUB_TOKEN", "")
+    github_token = os.environ.get("GITHUB_TOKEN", "")
+    gitlab_token = os.environ.get("GITLAB_TOKEN", "")
     bumped_file = os.environ.get("BUMPED_PACKAGES_FILE", "/tmp/bumped_packages.txt")
 
     # Remove stale bumped-packages file
@@ -441,7 +453,7 @@ def main() -> None:
 
     for pkg_dir in packages:
         try:
-            process_package(pkg_dir, token, bumped_file)
+            process_package(pkg_dir, github_token, gitlab_token, bumped_file)
         except Exception as exc:
             err(f"failed processing {pkg_dir}: {exc}")
 

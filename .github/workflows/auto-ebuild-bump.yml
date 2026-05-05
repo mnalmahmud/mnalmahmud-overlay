@@ -101,7 +101,8 @@ jobs:
           delete-branch: true
           title: 'auto-bump: update ebuild versions'
           body: |
-            Automated ebuild version bumps based on upstream GitHub releases/tags.
+            Automated ebuild version bumps based on upstream releases/tags.
+            Supported sources: GitHub, GitLab, AUR, Debian (packages.debian.org).
 
             This pull request was opened automatically by the
             [`auto-ebuild-bump`](.github/workflows/auto-ebuild-bump.yml) workflow.

@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit unpacker
+inherit unpacker xdg-utils
 
 DESCRIPTION="Modern, multi-modal biometric authentication (Binary Release)"
 HOMEPAGE="https://github.com/TickLabVN/biopass"
@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 # Prevent Portage from stripping symbols, which can break pre-compiled binaries
-RESTRICT="strip"
+RESTRICT="mirror strip"
 
 RDEPEND="
     media-libs/gst-plugins-good

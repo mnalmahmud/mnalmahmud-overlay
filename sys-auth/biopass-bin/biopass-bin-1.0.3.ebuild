@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit unpacker
+inherit unpacker xdg-utils
 
 DESCRIPTION="Modern, multi-modal biometric authentication (Binary Release)"
 HOMEPAGE="https://github.com/TickLabVN/biopass"
@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 # Prevent Portage from stripping symbols, which can break pre-compiled binaries
-RESTRICT="strip"
+RESTRICT="mirror strip"
 
 RDEPEND="
     media-libs/gst-plugins-good
@@ -42,11 +42,12 @@ src_install() {
 
     exeinto "/usr/$(get_libdir)/biopass"
     for libfile in usr/lib/biopass/*; do
-        patchelf --set-rpath "/usr/$(get_libdir)/biopass" "${libfile}"
+        [[ "${libfile}" == usr/lib/biopass/libbiopass_*.so ]] && \
+            patchelf --set-rpath "/usr/$(get_libdir)/biopass" "${libfile}"
         doexe "${libfile}"
     done
 
-    exeinto /$(get_libdir)/security
+    exeinto "/usr/$(get_libdir)/security"
     doexe lib/security/libbiopass_pam.so
 
     insinto /etc/ld.so.conf.d
