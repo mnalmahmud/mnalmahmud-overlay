@@ -32,10 +32,6 @@ BDEPEND="
 	sys-devel/gettext
 "
 
-pkg_setup() {
-	python-single-r1_pkg_setup
-}
-
 src_prepare() {
 	cmake_src_prepare
 

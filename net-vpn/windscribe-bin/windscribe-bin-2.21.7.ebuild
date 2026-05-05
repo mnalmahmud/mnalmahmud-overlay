@@ -89,6 +89,7 @@ pkg_postinst() {
 	einfo
 	einfo "2. To enable the background service:"
 	einfo "   systemd: systemctl enable --now windscribe-helper"
-	einfo "   OpenRC: rc-update add windscribe-helper default"
+    einfo "   OpenRC:  rc-update add windscribe-helper default"
+    einfo "            rc-service windscribe-helper start"
 	einfo
 }

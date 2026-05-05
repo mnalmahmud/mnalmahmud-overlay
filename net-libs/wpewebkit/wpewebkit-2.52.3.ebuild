@@ -34,7 +34,7 @@ LICENSE="
 "
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
-IUSE="+systemd doc minibrowser sysprof"
+IUSE="systemd doc minibrowser sysprof"
 
 BDEPEND="
 	${PYTHON_DEPS}
@@ -84,11 +84,9 @@ RDEPEND="
 	net-libs/libsoup:3.0
 	sys-apps/bubblewrap
     systemd? ( sys-apps/systemd )
-    !systemd? ( sys-auth/elogind )
 	sys-apps/xdg-dbus-proxy
 	sys-libs/libseccomp
 	sys-libs/zlib
-	virtual/jpeg
 	x11-libs/cairo
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
@@ -96,10 +94,6 @@ RDEPEND="
 DEPEND="${RDEPEND}
     sysprof? ( dev-util/sysprof-capture:4 )
 "
-
-pkg_setup() {
-	python-any-r1_pkg_setup
-}
 
 src_configure() {
 	append-flags -fcf-protection=none
@@ -109,6 +103,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DPORT=WPE
 		-DENABLE_WPE_PLATFORM=ON
+		-DENABLE_JOURNALD_LOG=$(usex systemd)
 		-DENABLE_MINIBROWSER=$(usex minibrowser)
 		-DENABLE_DOCUMENTATION=$(usex doc)
 		-DENABLE_SPEECH_SYNTHESIS=OFF
@@ -118,8 +113,4 @@ src_configure() {
 	)
 
 	cmake_src_configure
-}
-
-src_install() {
-	cmake_src_install
 }
