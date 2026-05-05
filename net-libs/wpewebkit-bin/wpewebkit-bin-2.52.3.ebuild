@@ -36,8 +36,12 @@ LICENSE="
 "
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
+IUSE="+systemd"
 RESTRICT="mirror strip"
 QA_PREBUILT="usr/lib*/*"
+BDEPEND="
+    !systemd? ( dev-util/patchelf )
+"
 RDEPEND="
     app-accessibility/at-spi2-core:2
 	dev-db/sqlite:3
@@ -73,7 +77,8 @@ RDEPEND="
 	media-libs/woff2
 	net-libs/libsoup:3.0
 	sys-apps/bubblewrap
-	|| ( sys-apps/systemd sys-apps/systemd-utils )
+    systemd? ( sys-apps/systemd )
+    !systemd? ( sys-auth/elogind )
 	sys-apps/xdg-dbus-proxy
 	sys-devel/gcc
 	sys-libs/libseccomp
@@ -91,6 +96,13 @@ src_install() {
 
     if [[ -d "${deb_libdir}" ]]; then
         dodir "${gentoo_libdir}"
+        if ! use systemd; then
+            einfo "Patching ELF headers for OpenRC (elogind) support..."
+            patchelf --replace-needed libsystemd.so.0 libelogind.so.0 \
+                "${deb_libdir}"/libWPEWebKit-2.0.so.1.* || die "Failed to patch libWPEWebKit"
+            patchelf --replace-needed libsystemd.so.0 libelogind.so.0 \
+                "${deb_libdir}"/wpe-webkit-2.0/MiniBrowser || die "Failed to patch MiniBrowser"
+        fi
         cp -a "${deb_libdir}"/* "${ED}${gentoo_libdir}/" || die "Failed to copy lib directory"
     fi
 
