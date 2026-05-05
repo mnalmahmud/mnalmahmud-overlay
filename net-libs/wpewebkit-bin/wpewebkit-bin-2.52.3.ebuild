@@ -73,11 +73,11 @@ RDEPEND="
 	media-libs/woff2
 	net-libs/libsoup:3.0
 	sys-apps/bubblewrap
+	|| ( sys-apps/systemd sys-auth/elogind )
 	sys-apps/xdg-dbus-proxy
 	sys-devel/gcc
 	sys-libs/libseccomp
 	sys-libs/zlib
-	virtual/libsystemd
 	x11-libs/cairo
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
