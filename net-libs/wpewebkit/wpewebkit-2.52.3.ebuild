@@ -117,8 +117,7 @@ src_configure() {
 	export AR="llvm-ar" NM="llvm-nm" RANLIB="llvm-ranlib"
     append-ldflags "-fuse-ld=lld"
 
-	filter-flags "-D_FORTIFY_SOURCE=3"
-    append-flags "-D_FORTIFY_SOURCE=2"
+    replace-flags "-D_FORTIFY_SOURCE=3" "-D_FORTIFY_SOURCE=2"
 
     append-flags -fcf-protection=none
 
