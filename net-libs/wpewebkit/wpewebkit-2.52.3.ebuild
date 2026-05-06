@@ -1,7 +1,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..14} )
-inherit cmake flag-o-matic python-any-r1
+inherit cmake flag-o-matic python-any-r1 toolchain-funcs
 
 DESCRIPTION="Embeddable web content engine"
 HOMEPAGE="https://wpewebkit.org"
@@ -34,20 +34,24 @@ LICENSE="
 "
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
-IUSE="systemd doc minibrowser sysprof"
+IUSE="-doc +introspection -minibrowser -sysprof systemd"
 
 BDEPEND="
 	${PYTHON_DEPS}
 	dev-lang/ruby
 	dev-build/cmake
 	dev-build/ninja
+	introspection? ( dev-libs/gobject-introspection )
 	dev-libs/wayland-protocols
 	doc? ( dev-util/gi-docgen )
 	dev-util/gperf
 	dev-util/unifdef
 	sys-devel/bison
 	sys-devel/flex
+    sys-devel/clang
+    sys-devel/lld
 "
+
 RDEPEND="
     app-accessibility/at-spi2-core:2
 	dev-db/sqlite:3
@@ -62,6 +66,7 @@ RDEPEND="
 	dev-libs/libxml2:2
 	dev-libs/libxslt
 	dev-libs/wayland
+	sysprof? ( dev-util/sysprof-capture:4 )
 	gui-libs/libwpe:1.0
 	gui-libs/wpebackend-fdo:1.0
 	media-fonts/font-misc-misc
@@ -91,26 +96,31 @@ RDEPEND="
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
 "
-DEPEND="${RDEPEND}
-    sysprof? ( dev-util/sysprof-capture:4 )
-"
+DEPEND="${RDEPEND}"
 
 src_configure() {
-	append-flags -fcf-protection=none
-	filter-flags "-D_FORTIFY_SOURCE=3"
-	append-flags "-D_FORTIFY_SOURCE=2"
-
+	# -DCMAKE_BUILD_TYPE=Release
 	local mycmakeargs=(
-		-DPORT=WPE
-		-DENABLE_WPE_PLATFORM=ON
-		-DENABLE_JOURNALD_LOG=$(usex systemd)
-		-DENABLE_MINIBROWSER=$(usex minibrowser)
 		-DENABLE_DOCUMENTATION=$(usex doc)
+		-DENABLE_INTROSPECTION=$(usex introspection)
+		-DENABLE_MINIBROWSER=$(usex minibrowser)
+		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof)
+		-DENABLE_JOURNALD_LOG=$(usex systemd)
 		-DENABLE_SPEECH_SYNTHESIS=OFF
+		-DENABLE_WPE_PLATFORM=ON
+		-DPORT=WPE
 		-DUSE_FLITE=OFF
 		-DUSE_LIBBACKTRACE=OFF
-		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof)
 	)
+
+	export CC="clang" CXX="clang++"
+	export AR="llvm-ar" NM="llvm-nm" RANLIB="llvm-ranlib"
+    append-ldflags "-fuse-ld=lld"
+
+	filter-flags "-D_FORTIFY_SOURCE=3"
+    append-flags "-D_FORTIFY_SOURCE=2"
+
+    append-flags -fcf-protection=none
 
 	cmake_src_configure
 }
