@@ -133,7 +133,7 @@ src_configure() {
         append-cppflags -DNDEBUG
     fi
 	local mycmakeargs=(
-	    -DENABLE_ACCESSIBILITY_ISOLATED_TREE=$(usex accessibility ON OFF)
+	    -DENABLE_ACCESSIBILITY_ISOLATED_TREE=OFF
 	    -DENABLE_API_TESTS=$(usex test ON OFF)
 		-DENABLE_BUBBLEWRAP_SANDBOX=$(usex sandbox ON OFF)
 		-DENABLE_DOCUMENTATION=$(usex doc ON OFF)
