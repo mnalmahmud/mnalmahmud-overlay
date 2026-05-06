@@ -100,7 +100,7 @@ DEPEND="${RDEPEND}"
 
 src_configure() {
     if ! use debug; then
-        append-flags -DNDEBUG
+        append-cppflags -DNDEBUG
     fi
 	local mycmakeargs=(
 		-DENABLE_DOCUMENTATION=$(usex doc ON OFF)
