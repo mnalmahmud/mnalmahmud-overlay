@@ -34,7 +34,7 @@ LICENSE="
 "
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
-IUSE="-doc +introspection -minibrowser -sysprof systemd"
+IUSE="-debug -doc +introspection -minibrowser -sysprof systemd"
 
 BDEPEND="
 	${PYTHON_DEPS}
@@ -99,13 +99,15 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_configure() {
-	# -DCMAKE_BUILD_TYPE=Release
+    if ! use debug; then
+        append-flags -DNDEBUG
+    fi
 	local mycmakeargs=(
-		-DENABLE_DOCUMENTATION=$(usex doc)
-		-DENABLE_INTROSPECTION=$(usex introspection)
-		-DENABLE_MINIBROWSER=$(usex minibrowser)
-		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof)
-		-DENABLE_JOURNALD_LOG=$(usex systemd)
+		-DENABLE_DOCUMENTATION=$(usex doc ON OFF)
+		-DENABLE_INTROSPECTION=$(usex introspection ON OFF)
+		-DENABLE_MINIBROWSER=$(usex minibrowser ON OFF)
+		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof ON OFF)
+		-DENABLE_JOURNALD_LOG=$(usex systemd ON OFF)
 		-DENABLE_SPEECH_SYNTHESIS=OFF
 		-DENABLE_WPE_PLATFORM=ON
 		-DPORT=WPE
@@ -113,8 +115,12 @@ src_configure() {
 		-DUSE_LIBBACKTRACE=OFF
 	)
 
-	export CC="clang" CXX="clang++"
-	export AR="llvm-ar" NM="llvm-nm" RANLIB="llvm-ranlib"
+    CC=${CHOST}-clang
+    CXX=${CHOST}-clang++
+    AR=llvm-ar
+    NM=llvm-nm
+    RANLIB=llvm-ranlib
+    tc-export CC CXX AR NM RANLIB
     append-ldflags "-fuse-ld=lld"
 
     replace-flags "-D_FORTIFY_SOURCE=3" "-D_FORTIFY_SOURCE=2"
