@@ -58,26 +58,27 @@ BDEPEND="
 	sys-devel/flex
 "
 
+# ATK: /usr/include/atk-1.0 minimum required is "2.16.0"
 RDEPEND="
 	accessibility? (
 	    app-accessibility/at-spi2-core
 	)
 	dev-db/sqlite:3
 	dev-libs/expat
-	>=dev-libs/glib-2.80.0:2
+	>=dev-libs/glib-2.70.0:2
 	dev-libs/hyphen
-	>=dev-libs/icu-75:=
-	dev-libs/libgcrypt
-	dev-libs/libinput
-	gamepad? ( >=dev-libs/libmanette-0.2 )
+	>=dev-libs/icu-70.1:=
+	>=dev-libs/libgcrypt-1.7.0
+	>=dev-libs/libinput-1.19.0
+	gamepad? ( >=dev-libs/libmanette-0.2.4 )
 	dev-libs/libtasn1
-	>=dev-libs/libxml2-2.13.9:=
-	>=dev-libs/libxslt-1.1.40
+	>=dev-libs/libxml2-2.9.13:=
+	>=dev-libs/libxslt-1.1.13
 	webrtc? (
 		dev-libs/openssl
 		>=media-plugins/gst-plugins-webrtc-1.24.10:1.0
 	)
-	dev-libs/wayland
+	>=dev-libs/wayland-1.20
 	qt? (
 		dev-qt/qtcore:6
 		dev-qt/qtdeclarative:6
@@ -91,24 +92,24 @@ RDEPEND="
 	>=media-libs/fontconfig-2.16.0:=
 	>=media-libs/freetype-2.14.0:=
 	gstreamer? (
-		>=media-libs/gstreamer-1.24.10:1.0
-		>=media-libs/gst-plugins-bad-1.24.10:1.0
-		>=media-libs/gst-plugins-base-1.24.10:1.0[egl]
-        >=media-plugins/gst-plugins-libav-1.24.10:1.0
-		>=media-plugins/gst-plugins-opus-1.24.10:1.0
-		>=media-plugins/gst-plugins-vpx-1.24.10:1.0
+		>=media-libs/gstreamer-1.18.4:1.0
+		>=media-libs/gst-plugins-bad-1.18.4:1.0
+		>=media-libs/gst-plugins-base-1.18.4:1.0[egl]
+        >=media-plugins/gst-plugins-libav-1.18.4:1.0
+		>=media-plugins/gst-plugins-opus-1.18.4:1.0
+		>=media-plugins/gst-plugins-vpx-1.18.4:1.0
 	)
-	>=media-libs/harfbuzz-12.2.0:=[icu(+)]
+	>=media-libs/harfbuzz-2.7.4:=[icu(+)]
 	media-libs/lcms:2
-	media-libs/libavif
-	>=media-libs/libepoxy-1.5.5:=
+	>=media-libs/libavif-0.9.0
+	>=media-libs/libepoxy-1.5.4:=
 	media-libs/libjpeg-turbo
-	jpegxl? ( media-libs/libjxl )
+	jpegxl? ( >=media-libs/libjxl-0.7.0 )
 	media-libs/libpng:=
 	media-libs/libwebp:=
 	media-libs/mesa
 	>=media-libs/woff2-1.0.2
-	net-libs/libsoup:3.0
+	>=net-libs/libsoup-3.0.0:3.0
 	sandbox? ( sys-apps/bubblewrap )
     systemd? ( sys-apps/systemd )
 	sys-apps/xdg-dbus-proxy
@@ -119,6 +120,11 @@ RDEPEND="
 	x11-libs/libxkbcommon
 "
 DEPEND="${RDEPEND}"
+
+pkg_setup() {
+    python-any-r1_pkg_setup
+    ruby-single_pkg_setup
+}
 
 src_configure() {
     filter-lto
@@ -147,8 +153,8 @@ src_configure() {
 		-DENABLE_WPE_QT_API=$(usex qt ON OFF)
 		-DENABLE_XSLT=ON
 		-DPORT=WPE
-		-DSHOULD_INSTALL_JS_SHELL=ON
 		-DRUBY_EXECUTABLE="${RUBY}"
+		-DSHOULD_INSTALL_JS_SHELL=ON
 		-DUSE_ATK=$(usex accessibility ON OFF)
 		-DUSE_FLITE=OFF
 		-DUSE_JPEGXL=$(usex jpegxl ON OFF)
