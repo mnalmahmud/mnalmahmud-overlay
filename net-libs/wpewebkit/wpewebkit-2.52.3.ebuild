@@ -3,6 +3,7 @@ EAPI=8
 CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python3_{10..14} )
 USE_RUBY="ruby32 ruby33 ruby34 ruby40"
+
 inherit cmake flag-o-matic python-any-r1 ruby-single toolchain-funcs
 
 DESCRIPTION="Embeddable web content engine"
@@ -123,7 +124,7 @@ DEPEND="${RDEPEND}"
 
 pkg_setup() {
     python-any-r1_pkg_setup
-    ruby-single_pkg_setup
+    ruby-ng_pkg_setup
 }
 
 src_configure() {
