@@ -46,10 +46,10 @@ BDEPEND="
 	doc? ( dev-util/gi-docgen )
 	dev-util/gperf
 	dev-util/unifdef
+	llvm-core/clang
+	llvm-core/lld
 	sys-devel/bison
 	sys-devel/flex
-    sys-devel/clang
-    sys-devel/lld
 "
 
 RDEPEND="
