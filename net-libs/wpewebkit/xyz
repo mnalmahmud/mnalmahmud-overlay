@@ -1,0 +1,1632 @@
+root@gentoo   /var/tmp/portage/net-libs/wpewebkit-2.52.3/work/wpewebkit-2.52.3
+1 # cmake -DPORT=WPE -LAH .
+-- The CMake build type is: RelWithDebInfo
+-- Found Perl: /usr/bin/perl (found suitable version "5.42.0", minimum required is "5.10.0")
+-- Found PerlModules: TRUE  found components: English FindBin JSON::PP
+-- Found Python: /usr/bin/python3.14 (found version "3.14.2") found components: Interpreter
+-- Found Ruby: /usr/bin/ruby (found suitable version "3.2.9", minimum required is "2.5")
+-- Enabling ccache: Couldn't find ccache program. Not enabling it.
+-- Performing Test C_COMPILER_SUPPORTS_-fno-strict-aliasing
+-- Performing Test C_COMPILER_SUPPORTS_-fno-strict-aliasing - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fno-strict-aliasing
+-- Performing Test CXX_COMPILER_SUPPORTS_-fno-strict-aliasing - Success
+-- Performing Test C_COMPILER_SUPPORTS_-fno-exceptions
+-- Performing Test C_COMPILER_SUPPORTS_-fno-exceptions - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fno-exceptions
+-- Performing Test CXX_COMPILER_SUPPORTS_-fno-exceptions - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fno-rtti
+-- Performing Test CXX_COMPILER_SUPPORTS_-fno-rtti - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fcoroutines
+-- Performing Test CXX_COMPILER_SUPPORTS_-fcoroutines - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fasynchronous-unwind-tables
+-- Performing Test CXX_COMPILER_SUPPORTS_-fasynchronous-unwind-tables - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-tautological-compare
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-tautological-compare - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-tautological-compare
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-tautological-compare - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wcast-align
+-- Performing Test C_COMPILER_SUPPORTS_-Wcast-align - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wformat-security
+-- Performing Test C_COMPILER_SUPPORTS_-Wformat-security - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wmissing-format-attribute
+-- Performing Test C_COMPILER_SUPPORTS_-Wmissing-format-attribute - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wpointer-arith
+-- Performing Test C_COMPILER_SUPPORTS_-Wpointer-arith - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wundef
+-- Performing Test C_COMPILER_SUPPORTS_-Wundef - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wcast-align
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wcast-align - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wformat-security
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wformat-security - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wmissing-format-attribute
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wmissing-format-attribute - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wpointer-arith
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wpointer-arith - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wundef
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wundef - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Qunused-arguments
+-- Performing Test C_COMPILER_SUPPORTS_-Qunused-arguments - Failed
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-maybe-uninitialized
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-maybe-uninitialized - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-parentheses-equality
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-parentheses-equality - Failed
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-misleading-indentation
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-misleading-indentation - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-psabi
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-psabi - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-nullability-completeness
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-nullability-completeness - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Qunused-arguments
+-- Performing Test CXX_COMPILER_SUPPORTS_-Qunused-arguments - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-maybe-uninitialized
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-maybe-uninitialized - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-parentheses-equality
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-parentheses-equality - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-misleading-indentation
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-misleading-indentation - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-psabi
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-psabi - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-nullability-completeness
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-nullability-completeness - Failed
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-subobject-linkage
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-subobject-linkage - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-subobject-linkage
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-subobject-linkage - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-noexcept-type
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-noexcept-type - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-expansion-to-defined
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-expansion-to-defined - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-expansion-to-defined
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-expansion-to-defined - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-array-bounds
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-array-bounds - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-nonnull
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-nonnull - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-stringop-overflow
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-stringop-overflow - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-stringop-overread
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-stringop-overread - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-odr
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-odr - Success
+-- Performing Test C_COMPILER_SUPPORTS_-fmax-errors__20
+-- Performing Test C_COMPILER_SUPPORTS_-fmax-errors__20 - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fmax-errors__20
+-- Performing Test CXX_COMPILER_SUPPORTS_-fmax-errors__20 - Success
+-- Performing Test C_COMPILER_SUPPORTS_-pipe
+-- Performing Test C_COMPILER_SUPPORTS_-pipe - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-pipe
+-- Performing Test CXX_COMPILER_SUPPORTS_-pipe - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Werror__undefined-inline
+-- Performing Test C_COMPILER_SUPPORTS_-Werror__undefined-inline - Failed
+-- Performing Test C_COMPILER_SUPPORTS_-Werror__undefined-internal
+-- Performing Test C_COMPILER_SUPPORTS_-Werror__undefined-internal - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Werror__undefined-inline
+-- Performing Test CXX_COMPILER_SUPPORTS_-Werror__undefined-inline - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Werror__undefined-internal
+-- Performing Test CXX_COMPILER_SUPPORTS_-Werror__undefined-internal - Failed
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-character-conversion
+-- Performing Test C_COMPILER_SUPPORTS_-Wno-character-conversion - Failed
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-character-conversion
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wno-character-conversion - Failed
+-- Performing Test C_COMPILER_SUPPORTS_-Wall
+-- Performing Test C_COMPILER_SUPPORTS_-Wall - Success
+-- Performing Test C_COMPILER_SUPPORTS_-Wextra
+-- Performing Test C_COMPILER_SUPPORTS_-Wextra - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wall
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wall - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wextra
+-- Performing Test CXX_COMPILER_SUPPORTS_-Wextra - Success
+-- Performing Test ATOMICS_ARE_BUILTIN
+-- Performing Test ATOMICS_ARE_BUILTIN - Failed
+-- Performing Test ATOMICS_REQUIRE_LIBATOMIC
+-- Performing Test ATOMICS_REQUIRE_LIBATOMIC - Success
+-- Performing Test STD_FILESYSTEM_IS_AVAILABLE
+-- Performing Test STD_FILESYSTEM_IS_AVAILABLE - Success
+-- Performing Test HAVE_FLOAT16
+-- Performing Test HAVE_FLOAT16 - Success
+-- Linker variant in use: BFD 
+--   Linker supports thin archives - TRUE
+--   Linker supports split debug info - TRUE
+--   Linker supports --gdb-index - FALSE
+--   Linker supports --disable-new-dtags - TRUE
+--   Linker supports --gc-sections - TRUE
+-- Archiver variant in use: BFD
+--   Archiver supports thin archives - TRUE
+-- Performing Test C_COMPILER_SUPPORTS_-ffunction-sections
+-- Performing Test C_COMPILER_SUPPORTS_-ffunction-sections - Success
+-- Performing Test C_COMPILER_SUPPORTS_-fdata-sections
+-- Performing Test C_COMPILER_SUPPORTS_-fdata-sections - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-ffunction-sections
+-- Performing Test CXX_COMPILER_SUPPORTS_-ffunction-sections - Success
+-- Performing Test CXX_COMPILER_SUPPORTS_-fdata-sections
+-- Performing Test CXX_COMPILER_SUPPORTS_-fdata-sections - Success
+-- Performing Test CXX_STDLIB_IS_LIBCPP
+-- Performing Test CXX_STDLIB_IS_LIBCPP - Failed
+-- Performing Test CXX_STDLIB_IS_GLIBCXX
+-- Performing Test CXX_STDLIB_IS_GLIBCXX - Success
+-- C++ standard library in use: GLIBCXX
+--   Assertions enabled, _GLIBCXX_ASSERTIONS=1
+-- Looking for features.h
+-- Looking for features.h - found
+-- Looking for errno.h
+-- Looking for errno.h - found
+-- Looking for langinfo.h
+-- Looking for langinfo.h - found
+-- Looking for sys/mman.h
+-- Looking for sys/mman.h - found
+-- Looking for pthread_np.h
+-- Looking for pthread_np.h - not found
+-- Looking for sys/param.h
+-- Looking for sys/param.h - found
+-- Looking for sys/time.h
+-- Looking for sys/time.h - found
+-- Looking for sys/timeb.h
+-- Looking for sys/timeb.h - found
+-- Looking for linux/memfd.h
+-- Looking for linux/memfd.h - found
+-- Looking for _aligned_malloc
+-- Looking for _aligned_malloc - not found
+-- Looking for localtime_r
+-- Looking for localtime_r - found
+-- Looking for malloc_trim
+-- Looking for malloc_trim - found
+-- Looking for statx
+-- Looking for statx - found
+-- Looking for timegm
+-- Looking for timegm - found
+-- Looking for timerfd_create
+-- Looking for timerfd_create - found
+-- Looking for vasprintf
+-- Looking for vasprintf - found
+-- Looking for regexec
+-- Looking for regexec - found
+-- Looking for pthread_main_np
+-- Looking for pthread_main_np - not found
+-- Looking for MAP_ALIGNED
+-- Looking for MAP_ALIGNED - not found
+-- Looking for SHM_ANON
+-- Looking for SHM_ANON - not found
+-- Looking for timingsafe_bcmp
+-- Looking for timingsafe_bcmp - not found
+-- Looking for SIGTRAP
+-- Looking for SIGTRAP - found
+-- Performing Test HAVE_STAT_BIRTHTIME_value
+-- Performing Test HAVE_STAT_BIRTHTIME_value - Failed
+-- Performing Test HAVE_TM_GMTOFF_value
+-- Performing Test HAVE_TM_GMTOFF_value - Success
+-- Performing Test HAVE_TM_ZONE_value
+-- Performing Test HAVE_TM_ZONE_value - Success
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __int128_t
+-- Check size of __int128_t - done
+-- Found GLib: /usr/lib64/libglib-2.0.so (found suitable version "2.84.4", minimum required is "2.70.0") found components: GioUnix Thread Module
+-- Found hb-features.h
+-- Found the following HarfBuzz libraries:
+--  HarfBuzz (required): /usr/lib64/libharfbuzz.so
+--  ICU (required): /usr/lib64/libharfbuzz-icu.so
+-- Found HarfBuzz: /usr/include/harfbuzz (found suitable version "12.2.0", minimum required is "2.7.4")
+-- Found ICU: /usr/include (found suitable version "78.2", minimum required is "70.1") found components: data i18n uc
+-- Found JPEG: /usr/lib64/libjpeg.so (found version "62")
+-- Found Epoxy: /usr/lib64/libepoxy.so (found suitable version "1.5.10", minimum required is "1.5.4")
+-- Found LibGcrypt: /usr/lib64/libgcrypt.so (found suitable version "1.11.2-unknown", minimum required is "1.7.0")
+-- Found Soup3: /usr/lib64/libsoup-3.0.so (found suitable version "3.6.5", minimum required is "3.0.0")
+-- Found Tasn1: /usr/lib64/libtasn1.so (found version "4.21.0")
+-- Found XkbCommon: 1.13.1 (Required is at least version "0.4.0")
+-- Found LibXml2: /usr/lib64/libxml2.so (found suitable version "2.15.1", minimum required is "2.9.13")
+-- Found ZLIB: /usr/lib64/libz.so (found version "1.3.1")
+-- Found PNG: /usr/lib64/libpng.so (found version "1.6.55")
+-- Found SQLite3: /usr/lib64/libsqlite3.so (found version "3.51.2")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found Unifdef: /usr/bin/unifdef
+-- Found the following WebP libraries:
+--  WebP (required): /usr/lib64/libwebp.so
+--  demux (required): /usr/lib64/libwebpdemux.so
+-- Found WebP: /usr/include
+-- Found glib-compile-resources (required): /usr/bin/glib-compile-resources (2.84.4)
+-- Disabling USE_GSTREAMER_WEBRTC since ENABLE_WEB_RTC is disabled.
+-- Checking for module 'gobject-introspection-1.0'
+--   Found gobject-introspection-1.0, version 1.84.0
+-- Found GI: /usr/bin/g-ir-scanner (found version "1.84.0")
+-- Found GIDocgen: /usr/bin/gi-docgen (found version "2025.4")
+-- Found ATK: /usr/include/atk-1.0 (found suitable version "2.56.5", minimum required is "2.16.0")
+-- Found ATKBridge: /usr/lib64/libatk-bridge-2.0.so (found version "2.56.5")
+-- Found the following Flite libraries:
+--  flite (required): /usr/lib64/libflite.so
+--  flite_usenglish (required): /usr/lib64/libflite_usenglish.so
+--  flite_cmu_grapheme_lang (required): /usr/lib64/libflite_cmu_grapheme_lang.so
+--  flite_cmu_grapheme_lex (required): /usr/lib64/libflite_cmu_grapheme_lex.so
+--  flite_cmu_indic_lang (required): /usr/lib64/libflite_cmu_indic_lang.so
+--  flite_cmu_indic_lex (required): /usr/lib64/libflite_cmu_indic_lex.so
+--  flite_cmulex (required): /usr/lib64/libflite_cmulex.so
+--  flite_cmu_time_awb (required): /usr/lib64/libflite_cmu_time_awb.so
+--  flite_cmu_us_awb (required): /usr/lib64/libflite_cmu_us_awb.so
+--  flite_cmu_us_kal16 (required): /usr/lib64/libflite_cmu_us_kal16.so
+--  flite_cmu_us_kal (required): /usr/lib64/libflite_cmu_us_kal.so
+--  flite_cmu_us_rms (required): /usr/lib64/libflite_cmu_us_rms.so
+--  flite_cmu_us_slt (required): /usr/lib64/libflite_cmu_us_slt.so
+-- Found Flite: /usr/include/flite (found suitable version "2.2", minimum required is "2.2")
+-- Found JPEGXL: /usr/lib64/libjxl.so (found suitable version "0.11.2", minimum required is "0.7.0")
+-- Found Hyphen: /usr/lib64/libhyphen.so
+-- Found the following WOFF2 libraries:
+--  WOFF2 (required): /usr/lib64/libwoff2common.so
+--  dec (required): /usr/lib64/libwoff2dec.so
+-- Found WOFF2: /usr/lib64/libwoff2common.so (found suitable version "1.0.2", minimum required is "1.0.2")
+-- Found LibXslt: /usr/lib64/libxslt.so (found suitable version "1.1.45", minimum required is "1.1.13")
+-- Found WPE: /usr/lib64/libwpe-1.0.so (found version "1.16.2")
+-- Found AVIF: /usr/include/avif (found suitable version "1.3.0", minimum required is "0.9.0")
+-- Found Journald: /usr/lib64/libelogind.so (found version "255")
+-- Found LCMS2: /usr/lib64/liblcms2.so (found version "2.17")
+-- Found LibDRM: /usr/include/libdrm (found version "2.4.131")
+-- Looking for drmGetFormatModifierVendor
+-- Looking for drmGetFormatModifierVendor - found
+-- Looking for drmGetFormatModifierName
+-- Looking for drmGetFormatModifierName - found
+-- Found GBM: /usr/lib64/libgbm.so (found version "25.3.6")
+-- Looking for gbm_bo_get_fd_for_plane
+-- Looking for gbm_bo_get_fd_for_plane - found
+-- Looking for gbm_bo_create_with_modifiers2
+-- Looking for gbm_bo_create_with_modifiers2 - found
+-- Could NOT find LibBacktrace (missing: LIBBACKTRACE_INCLUDE_DIR LIBBACKTRACE_LIBRARY) 
+CMake Error at Source/cmake/OptionsWPE.cmake:460 (message):
+  libbacktrace is required for USE_LIBBACKTRACE
+Call Stack (most recent call first):
+  Source/cmake/WebKitCommon.cmake:241 (include)
+  CMakeLists.txt:16 (include)
+
+
+-- Configuring incomplete, errors occurred!
+-- Cache values
+// Static analysis tools to run on the build
+ANALYZERS:BOOL=OFF
+
+// Path to a file.
+ATKBridge_INCLUDE_DIR:PATH=/usr/include/at-spi2-atk/2.0
+
+// Path to a library.
+ATKBridge_LIBRARY:FILEPATH=/usr/lib64/libatk-bridge-2.0.so
+
+// Path to a file.
+ATK_INCLUDE_DIRS:PATH=/usr/include/atk-1.0
+
+// Path to a library.
+ATK_LIBRARIES:FILEPATH=/usr/lib64/libatk-1.0.so
+
+// Path to a file.
+AVIF_INCLUDE_DIR:PATH=/usr/include/avif
+
+// Path to a library.
+AVIF_LIBRARY:FILEPATH=/usr/lib64/libavif.so
+
+// Path to a program.
+CCACHE_FOUND:FILEPATH=CCACHE_FOUND-NOTFOUND
+
+// Path to a program.
+CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
+
+// Path to a program.
+CMAKE_AR:FILEPATH=/usr/bin/ar
+
+// Choose the type of build.
+CMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+
+// Enable/Disable color output during build.
+CMAKE_COLOR_MAKEFILE:BOOL=ON
+
+// CXX compiler
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
+
+// A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler
+CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar
+
+// A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib
+
+// Flags used by the CXX compiler during all build types.
+CMAKE_CXX_FLAGS:STRING=
+
+// Flags used by the CXX compiler during DEBUG builds.
+CMAKE_CXX_FLAGS_DEBUG:STRING=-g
+
+// Flags used by the CXX compiler during MINSIZEREL builds.
+CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+
+// Flags used by the CXX compiler during RELEASE builds.
+CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
+
+// Flags used by the CXX compiler during RELWITHDEBINFO builds.
+CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
+// C compiler
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
+
+// A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar
+
+// A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib
+
+// Flags used by the C compiler during all build types.
+CMAKE_C_FLAGS:STRING=
+
+// Flags used by the C compiler during DEBUG builds.
+CMAKE_C_FLAGS_DEBUG:STRING=-g
+
+// Flags used by the C compiler during MINSIZEREL builds.
+CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+
+// Flags used by the C compiler during RELEASE builds.
+CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
+
+// Flags used by the C compiler during RELWITHDEBINFO builds.
+CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
+// Path to a program.
+CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
+
+// Flags used by the linker during all build types.
+CMAKE_EXE_LINKER_FLAGS:STRING=
+
+// Flags used by the linker during DEBUG builds.
+CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
+
+// Flags used by the linker during MINSIZEREL builds.
+CMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=
+
+// Flags used by the linker during RELEASE builds.
+CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
+
+// Flags used by the linker during RELWITHDEBINFO builds.
+CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+// Enable/Disable output of compile commands during generation.
+CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
+
+// User executables (bin)
+CMAKE_INSTALL_BINDIR:PATH=bin
+
+// Read-only architecture-independent data (DATAROOTDIR)
+CMAKE_INSTALL_DATADIR:PATH=
+
+// Read-only architecture-independent data root (share)
+CMAKE_INSTALL_DATAROOTDIR:PATH=share
+
+// Documentation root (DATAROOTDIR/doc/PROJECT_NAME)
+CMAKE_INSTALL_DOCDIR:PATH=
+
+// C header files (include)
+CMAKE_INSTALL_INCLUDEDIR:PATH=include
+
+// Info documentation (DATAROOTDIR/info)
+CMAKE_INSTALL_INFODIR:PATH=
+
+// Object code libraries (lib64)
+CMAKE_INSTALL_LIBDIR:PATH=lib64
+
+// Program executables (libexec)
+CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
+
+// Locale-dependent data (DATAROOTDIR/locale)
+CMAKE_INSTALL_LOCALEDIR:PATH=
+
+// Modifiable single-machine data (var)
+CMAKE_INSTALL_LOCALSTATEDIR:PATH=var
+
+// Man documentation (DATAROOTDIR/man)
+CMAKE_INSTALL_MANDIR:PATH=
+
+// C header files for non-gcc (/usr/include)
+CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
+
+// Install path prefix, prepended onto install directories.
+CMAKE_INSTALL_PREFIX:PATH=/usr/local
+
+// Run-time variable data (LOCALSTATEDIR/run)
+CMAKE_INSTALL_RUNSTATEDIR:PATH=
+
+// System admin executables (sbin)
+CMAKE_INSTALL_SBINDIR:PATH=sbin
+
+// Modifiable architecture-independent data (com)
+CMAKE_INSTALL_SHAREDSTATEDIR:PATH=com
+
+// Read-only single-machine data (etc)
+CMAKE_INSTALL_SYSCONFDIR:PATH=etc
+
+// Path to a program.
+CMAKE_LINKER:FILEPATH=/usr/bin/ld
+
+// Path to a program.
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
+
+// Flags used by the linker during the creation of modules during all build types.
+CMAKE_MODULE_LINKER_FLAGS:STRING=
+
+// Flags used by the linker during the creation of modules during DEBUG builds.
+CMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=
+
+// Flags used by the linker during the creation of modules during MINSIZEREL builds.
+CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=
+
+// Flags used by the linker during the creation of modules during RELEASE builds.
+CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
+
+// Flags used by the linker during the creation of modules during RELWITHDEBINFO builds.
+CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+// Path to a program.
+CMAKE_NM:FILEPATH=/usr/bin/nm
+
+// Path to a program.
+CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
+
+// Path to a program.
+CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
+
+// Path to a program.
+CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
+
+// Path to a program.
+CMAKE_READELF:FILEPATH=/usr/bin/readelf
+
+// Flags used by the linker during the creation of shared libraries during all build types.
+CMAKE_SHARED_LINKER_FLAGS:STRING=
+
+// Flags used by the linker during the creation of shared libraries during DEBUG builds.
+CMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=
+
+// Flags used by the linker during the creation of shared libraries during MINSIZEREL builds.
+CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=
+
+// Flags used by the linker during the creation of shared libraries during RELEASE builds.
+CMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=
+
+// Flags used by the linker during the creation of shared libraries during RELWITHDEBINFO builds.
+CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+// If set, runtime paths are not added when installing shared libraries, but are added when building.
+CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+
+// If set, runtime paths are not added when using shared libraries.
+CMAKE_SKIP_RPATH:BOOL=NO
+
+// Flags used by the archiver during the creation of static libraries during all build types.
+CMAKE_STATIC_LINKER_FLAGS:STRING=
+
+// Flags used by the archiver during the creation of static libraries during DEBUG builds.
+CMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=
+
+// Flags used by the archiver during the creation of static libraries during MINSIZEREL builds.
+CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=
+
+// Flags used by the archiver during the creation of static libraries during RELEASE builds.
+CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
+
+// Flags used by the archiver during the creation of static libraries during RELWITHDEBINFO builds.
+CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+// Path to a program.
+CMAKE_STRIP:FILEPATH=/usr/bin/strip
+
+// Path to a program.
+CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
+
+// If this value is on, makefiles will be generated without the .SILENT directive, and all commands will be echoed to the console during the make.  This is useful for debugging only. With Visual Studio IDE projects all commands are done without /nologo.
+CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+// Enable to build Debian packages
+CPACK_BINARY_DEB:BOOL=OFF
+
+// Enable to build FreeBSD packages
+CPACK_BINARY_FREEBSD:BOOL=OFF
+
+// Enable to build IFW packages
+CPACK_BINARY_IFW:BOOL=OFF
+
+// Enable to build NSIS packages
+CPACK_BINARY_NSIS:BOOL=OFF
+
+// Enable to build RPM packages
+CPACK_BINARY_RPM:BOOL=OFF
+
+// Enable to build STGZ packages
+CPACK_BINARY_STGZ:BOOL=ON
+
+// Enable to build TBZ2 packages
+CPACK_BINARY_TBZ2:BOOL=OFF
+
+// Enable to build TGZ packages
+CPACK_BINARY_TGZ:BOOL=ON
+
+// Enable to build TXZ packages
+CPACK_BINARY_TXZ:BOOL=OFF
+
+// Enable to build TZ packages
+CPACK_BINARY_TZ:BOOL=ON
+
+// Enable to build RPM source packages
+CPACK_SOURCE_RPM:BOOL=OFF
+
+// Enable to build TBZ2 source packages
+CPACK_SOURCE_TBZ2:BOOL=ON
+
+// Enable to build TGZ source packages
+CPACK_SOURCE_TGZ:BOOL=ON
+
+// Enable to build TXZ source packages
+CPACK_SOURCE_TXZ:BOOL=ON
+
+// Enable to build TZ source packages
+CPACK_SOURCE_TZ:BOOL=ON
+
+// Enable to build ZIP source packages
+CPACK_SOURCE_ZIP:BOOL=OFF
+
+// Use Debug Fission support
+DEBUG_FISSION:BOOL=OFF
+
+// Build with warnings as errors if DEVELOPER_MODE is also enabled
+DEVELOPER_MODE_FATAL_WARNINGS:BOOL=ON
+
+// Toggle accessibility isolated tree support
+ENABLE_ACCESSIBILITY_ISOLATED_TREE:BOOL=OFF
+
+// Enable public API unit tests
+ENABLE_API_TESTS:BOOL=OFF
+
+// Toggle Apple Pay support
+ENABLE_APPLE_PAY:BOOL=OFF
+
+// Toggle Application Manifest support
+ENABLE_APPLICATION_MANIFEST:BOOL=OFF
+
+// Enable or disable assertions regardless of build type
+ENABLE_ASSERTS:STRING=AUTO
+
+// Enable asynchronous scrolling
+ENABLE_ASYNC_SCROLLING:BOOL=ON
+
+// Toggle Attachment Element support
+ENABLE_ATTACHMENT_ELEMENT:BOOL=OFF
+
+// Toggle autocapitalize support
+ENABLE_AUTOCAPITALIZE:BOOL=ON
+
+// Toggle AVFoundation caption support
+ENABLE_AVF_CAPTIONS:BOOL=OFF
+
+// Toggle breakpad minidump support.
+ENABLE_BREAKPAD:BOOL=OFF
+
+// Toggle Bubblewrap sandboxing support
+ENABLE_BUBBLEWRAP_SANDBOX:BOOL=ON
+
+// Toggle cache partitioning support
+ENABLE_CACHE_PARTITIONING:BOOL=OFF
+
+// Toggle Cog browser compilation.
+ENABLE_COG:BOOL=OFF
+
+// Toggle Content Extensions support
+ENABLE_CONTENT_EXTENSIONS:BOOL=ON
+
+// Toggle content filtering support
+ENABLE_CONTENT_FILTERING:BOOL=OFF
+
+// Toggle Context Menu support
+ENABLE_CONTEXT_MENUS:BOOL=ON
+
+// Toggle cursor visibility support
+ENABLE_CURSOR_VISIBILITY:BOOL=ON
+
+// Enable CLoop interpreter
+ENABLE_C_LOOP:BOOL=OFF
+
+// Toggle Dark Mode CSS support
+ENABLE_DARK_MODE_CSS:BOOL=ON
+
+// Toggle datacue value support
+ENABLE_DATACUE_VALUE:BOOL=OFF
+
+// Toggle Device Orientation support
+ENABLE_DEVICE_ORIENTATION:BOOL=OFF
+
+// Toggle data flow graph JIT tier
+ENABLE_DFG_JIT:BOOL=ON
+
+// Whether to generate documentation.
+ENABLE_DOCUMENTATION:BOOL=ON
+
+// Toggle support of drag actions (including selection of text with mouse)
+ENABLE_DRAG_SUPPORT:BOOL=ON
+
+// Toggle EME V3 support
+ENABLE_ENCRYPTED_MEDIA:BOOL=OFF
+
+// Enable experimental features
+ENABLE_EXPERIMENTAL_FEATURES:BOOL=OFF
+
+// Toggle FTL JIT support
+ENABLE_FTL_JIT:BOOL=ON
+
+// Toggle FTP Directory support
+ENABLE_FTPDIR:BOOL=OFF
+
+// Toggle Fullscreen API support
+ENABLE_FULLSCREEN_API:BOOL=ON
+
+// Toggle Gamepad support
+ENABLE_GAMEPAD:BOOL=ON
+
+// Toggle Geolocation support
+ENABLE_GEOLOCATION:BOOL=ON
+
+// Toggle GPU Process support
+ENABLE_GPU_PROCESS:BOOL=ON
+
+// Toggle image diff support for layout tests
+ENABLE_IMAGE_DIFF:BOOL=ON
+
+// Toggle inspector alternate dispatchers support
+ENABLE_INSPECTOR_ALTERNATE_DISPATCHERS:BOOL=OFF
+
+// Toggle inspector web extensions support
+ENABLE_INSPECTOR_EXTENSIONS:BOOL=OFF
+
+// Toggle inspector telemetry support
+ENABLE_INSPECTOR_TELEMETRY:BOOL=OFF
+
+// Whether to enable GObject introspection.
+ENABLE_INTROSPECTION:BOOL=ON
+
+// Toggle iOS gesture events support
+ENABLE_IOS_GESTURE_EVENTS:BOOL=OFF
+
+// Toggle iOS touch events support
+ENABLE_IOS_TOUCH_EVENTS:BOOL=OFF
+
+// Enable building JavaScriptCore
+ENABLE_JAVASCRIPTCORE:BOOL=ON
+
+// Toggle JavaScript shell and testing support
+ENABLE_JAVASCRIPT_SHELL:BOOL=ON
+
+// Toggle JustInTime JavaScript support
+ENABLE_JIT:BOOL=ON
+
+// Whether to enable journald logging
+ENABLE_JOURNALD_LOG:BOOL=ON
+
+// Whether to enable dangerous development options in JSC by default.
+ENABLE_JSC_RESTRICTED_OPTIONS_BY_DEFAULT:BOOL=OFF
+
+// Toggle layout test support (DumpRenderTree/WebkitTestRunner)
+ENABLE_LAYOUT_TESTS:BOOL=OFF
+
+// Toggle legacy protocol manager support
+ENABLE_LEGACY_CUSTOM_PROTOCOL_MANAGER:BOOL=OFF
+
+// Toggle Legacy EME V2 support
+ENABLE_LEGACY_ENCRYPTED_MEDIA:BOOL=OFF
+
+// Include LLVM's instrumentation to generate profiles for PGO
+ENABLE_LLVM_PROFILE_GENERATION:BOOL=OFF
+
+// Whether to enable malloc heap breakdown.
+ENABLE_MALLOC_HEAP_BREAKDOWN:BOOL=OFF
+
+// Toggle MathML support
+ENABLE_MATHML:BOOL=ON
+
+// Toggle Media Capture support
+ENABLE_MEDIA_CAPTURE:BOOL=OFF
+
+// Toggle Media controls context menus.
+ENABLE_MEDIA_CONTROLS_CONTEXT_MENUS:BOOL=ON
+
+// Toggle Media Recorder support
+ENABLE_MEDIA_RECORDER:BOOL=ON
+
+// Toggle Media Session support
+ENABLE_MEDIA_SESSION:BOOL=ON
+
+// Toggle Media Session Coordinator support
+ENABLE_MEDIA_SESSION_COORDINATOR:BOOL=OFF
+
+// Toggle Media Session Playlist support
+ENABLE_MEDIA_SESSION_PLAYLIST:BOOL=OFF
+
+// Toggle Media Source support
+ENABLE_MEDIA_SOURCE:BOOL=ON
+
+// Toggle Media Statistics support
+ENABLE_MEDIA_STATISTICS:BOOL=OFF
+
+// Toggle Media Stream support
+ENABLE_MEDIA_STREAM:BOOL=ON
+
+// Whether to enable support for media telemetry
+ENABLE_MEDIA_TELEMETRY:BOOL=OFF
+
+// Toggle Memory Sampler support
+ENABLE_MEMORY_SAMPLER:BOOL=ON
+
+// Toggle MHTML support
+ENABLE_MHTML:BOOL=ON
+
+// Toggle MiniBrowser compilation.
+ENABLE_MINIBROWSER:BOOL=OFF
+
+// Toggle Scaled mouse cursor support
+ENABLE_MOUSE_CURSOR_SCALE:BOOL=ON
+
+// Toogle standalone navigator support
+ENABLE_NAVIGATOR_STANDALONE:BOOL=OFF
+
+// Toggle Notifications support
+ENABLE_NOTIFICATIONS:BOOL=ON
+
+// Toggle OffscreenCanvas support
+ENABLE_OFFSCREEN_CANVAS:BOOL=ON
+
+// Toggle OffscreenCanvas in Workers support
+ENABLE_OFFSCREEN_CANVAS_IN_WORKERS:BOOL=ON
+
+// Toggle Orientation Events support
+ENABLE_ORIENTATION_EVENTS:BOOL=OFF
+
+// Toggle Payment Request support
+ENABLE_PAYMENT_REQUEST:BOOL=OFF
+
+// Toggle PDF documents support using PDF.js
+ENABLE_PDFJS:BOOL=ON
+
+// Toggle PDFKit plugin support
+ENABLE_PDFKIT_PLUGIN:BOOL=OFF
+
+// Toggle periodical memory monitor support
+ENABLE_PERIODIC_MEMORY_MONITOR:BOOL=ON
+
+// Toggle Picture-in-Picture API support
+ENABLE_PICTURE_IN_PICTURE_API:BOOL=OFF
+
+// Toggle pointer lock support
+ENABLE_POINTER_LOCK:BOOL=OFF
+
+// Enable debugging tools for tracking RAII objects
+ENABLE_REFTRACKER:BOOL=OFF
+
+// Toggle release log support
+ENABLE_RELEASE_LOG:BOOL=OFF
+
+// Toggle remote inspector support
+ENABLE_REMOTE_INSPECTOR:BOOL=ON
+
+// Toggle resource usage support
+ENABLE_RESOURCE_USAGE:BOOL=ON
+
+// Toggle sampling profiler support
+ENABLE_SAMPLING_PROFILER:BOOL=ON
+
+// Toggle sandbox extensions support
+ENABLE_SANDBOX_EXTENSIONS:BOOL=OFF
+
+// Toggle service controls support
+ENABLE_SERVICE_CONTROLS:BOOL=OFF
+
+// Toggle network shareable resources support
+ENABLE_SHAREABLE_RESOURCE:BOOL=ON
+
+// Toggle smooth scrolling
+ENABLE_SMOOTH_SCROLLING:BOOL=ON
+
+// Toggle Speech Synthesis API support
+ENABLE_SPEECH_SYNTHESIS:BOOL=ON
+
+// Toggle Spellchecking support (requires Enchant)
+ENABLE_SPELLCHECK:BOOL=OFF
+
+// Toggle Swift demo URI feature
+ENABLE_SWIFT_DEMO_URI_SCHEME:BOOL=OFF
+
+// Toggle telephone number detection support
+ENABLE_TELEPHONE_NUMBER_DETECTION:BOOL=OFF
+
+// Toggle automatic text size adjustment support
+ENABLE_TEXT_AUTOSIZING:BOOL=OFF
+
+// Toggle EME V3 Thunder support
+ENABLE_THUNDER:BOOL=OFF
+
+// Toggle Touch Events support
+ENABLE_TOUCH_EVENTS:BOOL=ON
+
+// Toggle unified builds
+ENABLE_UNIFIED_BUILDS:BOOL=ON
+
+// Toggle user script message handler support
+ENABLE_USER_MESSAGE_HANDLERS:BOOL=ON
+
+// Toggle variation fonts support
+ENABLE_VARIATION_FONTS:BOOL=ON
+
+// Toggle Video support
+ENABLE_VIDEO:BOOL=ON
+
+// Toggle Video presentation mode support
+ENABLE_VIDEO_PRESENTATION_MODE:BOOL=OFF
+
+// Toggle video element fullscreen support
+ENABLE_VIDEO_USES_ELEMENT_FULLSCREEN:BOOL=ON
+
+// Toggle WebAssembly support
+ENABLE_WEBASSEMBLY:BOOL=ON
+
+// Toggle WebAssembly BBQ JIT support
+ENABLE_WEBASSEMBLY_BBQJIT:BOOL=ON
+
+// Toggle WebAssembly OMG JIT support
+ENABLE_WEBASSEMBLY_OMGJIT:BOOL=ON
+
+// Enable building JavaScriptCore
+ENABLE_WEBCORE:BOOL=ON
+
+// Toggle WebDriver service process
+ENABLE_WEBDRIVER:BOOL=ON
+
+// Toggler WebDriver BiDi protocol support
+ENABLE_WEBDRIVER_BIDI:BOOL=OFF
+
+// Toggle WebDriver allowing grapheme clusters to be sent as a series of characters to a single action step
+ENABLE_WEBDRIVER_KEYBOARD_GRAPHEME_CLUSTERS:BOOL=OFF
+
+// Toggle WebDriver keyboard interactions
+ENABLE_WEBDRIVER_KEYBOARD_INTERACTIONS:BOOL=OFF
+
+// Toggle WebDriver mouse interactions
+ENABLE_WEBDRIVER_MOUSE_INTERACTIONS:BOOL=OFF
+
+// Toggle WebDriver touch interactions
+ENABLE_WEBDRIVER_TOUCH_INTERACTIONS:BOOL=OFF
+
+// Toggle WebDriver wheel interactions
+ENABLE_WEBDRIVER_WHEEL_INTERACTIONS:BOOL=OFF
+
+// Toggle WebGL support
+ENABLE_WEBGL:BOOL=ON
+
+// Toggle WebGPU support
+ENABLE_WEBGPU:BOOL=OFF
+
+// Enable building WebKit
+ENABLE_WEBKIT:BOOL=ON
+
+// Toggle accelerated scrolling support
+ENABLE_WEBKIT_OVERFLOW_SCROLLING_CSS_PROPERTY:BOOL=OFF
+
+// Toggle WebXR support
+ENABLE_WEBXR:BOOL=OFF
+
+// Toggle WebXR Hit Test Module support
+ENABLE_WEBXR_HIT_TEST:BOOL=OFF
+
+// Toggle WebXR Layers support
+ENABLE_WEBXR_LAYERS:BOOL=OFF
+
+// Toggle Web API statistics support
+ENABLE_WEB_API_STATISTICS:BOOL=OFF
+
+// Toggle Web Audio support
+ENABLE_WEB_AUDIO:BOOL=ON
+
+// Toggle Web AuthN support
+ENABLE_WEB_AUTHN:BOOL=OFF
+
+// Toggle WebCodecs support
+ENABLE_WEB_CODECS:BOOL=ON
+
+// Toggle WebRTC support
+ENABLE_WEB_RTC:BOOL=OFF
+
+// Toggle wireless playback target support
+ENABLE_WIRELESS_PLAYBACK_TARGET:BOOL=OFF
+
+// Toggle WebExtensions support
+ENABLE_WK_WEB_EXTENSIONS:BOOL=OFF
+
+// Whether to build WPE 1.1 instead of WPE 2.0
+ENABLE_WPE_1_1_API:BOOL=OFF
+
+// Whether to enable the WPE legacy API (libwpe)
+ENABLE_WPE_LEGACY_API:BOOL=ON
+
+// Whether to enable the WPEPlatform library
+ENABLE_WPE_PLATFORM:BOOL=OFF
+
+// Whether to enable support for DRM platform
+ENABLE_WPE_PLATFORM_DRM:BOOL=ON
+
+// Whether to enable support for headless platform
+ENABLE_WPE_PLATFORM_HEADLESS:BOOL=ON
+
+// Whether to enable support for Wayland platform
+ENABLE_WPE_PLATFORM_WAYLAND:BOOL=ON
+
+// Whether to enable support for the Qt/QML plugin
+ENABLE_WPE_QT_API:BOOL=OFF
+
+// Toggle XSLT support
+ENABLE_XSLT:BOOL=ON
+
+// Absolute path to executable installation directory
+EXEC_INSTALL_DIR:PATH=/usr/local/bin
+
+// Path to a file.
+Epoxy_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+Epoxy_LIBRARY:FILEPATH=/usr/lib64/libepoxy.so
+
+// Path to a library.
+Flite_Cmu_Grapheme_Lang_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_grapheme_lang.so
+
+// Path to a library.
+Flite_Cmu_Grapheme_Lex_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_grapheme_lex.so
+
+// Path to a library.
+Flite_Cmu_Indic_Lang_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_indic_lang.so
+
+// Path to a library.
+Flite_Cmu_Indic_Lex_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_indic_lex.so
+
+// Path to a library.
+Flite_Cmu_Time_Awb_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_time_awb.so
+
+// Path to a library.
+Flite_Cmu_Us_Awb_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_us_awb.so
+
+// Path to a library.
+Flite_Cmu_Us_Kal16_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_us_kal16.so
+
+// Path to a library.
+Flite_Cmu_Us_Kal_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_us_kal.so
+
+// Path to a library.
+Flite_Cmu_Us_Rms_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_us_rms.so
+
+// Path to a library.
+Flite_Cmu_Us_Slt_LIBRARY:FILEPATH=/usr/lib64/libflite_cmu_us_slt.so
+
+// Path to a library.
+Flite_Cmulex_LIBRARY:FILEPATH=/usr/lib64/libflite_cmulex.so
+
+// Path to a file.
+Flite_INCLUDE_DIR:PATH=/usr/include/flite
+
+// Path to a library.
+Flite_LIBRARY:FILEPATH=/usr/lib64/libflite.so
+
+// Path to a library.
+Flite_Usenglish_LIBRARY:FILEPATH=/usr/lib64/libflite_usenglish.so
+
+// Path to a file.
+GBM_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+GBM_LIBRARY:FILEPATH=/usr/lib64/libgbm.so
+
+// Produce debug line information for offlineasm-generated code
+GCC_OFFLINEASM_SOURCE_MAP:BOOL=ON
+
+// Path to the gi-docgen program
+GIDocgen_EXE:FILEPATH=/usr/bin/gi-docgen
+
+// Path to a program.
+GI_COMPILER_EXE:FILEPATH=/usr/bin/g-ir-compiler
+
+// Path to installed .gir files
+GI_GIRDIR:PATH=/usr/local/share/gir-1.0
+
+// Path to a program.
+GI_SCANNER_EXE:FILEPATH=/usr/bin/g-ir-scanner
+
+// Path to installed .typelib files
+GI_TYPELIBDIR:PATH=/usr/local/lib64/girepository-1.0
+
+// Path to a program.
+GLIB_COMPILE_RESOURCES_EXECUTABLE:FILEPATH=/usr/bin/glib-compile-resources
+
+// Path to a file.
+GLib_Config_INCLUDE_DIR:PATH=/usr/lib64/glib-2.0/include
+
+// Path to a library.
+GLib_GioUnix_LIBRARY:FILEPATH=/usr/lib64/libgio-2.0.so
+
+// Path to a library.
+GLib_Gio_LIBRARY:FILEPATH=/usr/lib64/libgio-2.0.so
+
+// Path to a file.
+GLib_INCLUDE_DIR:PATH=/usr/include/glib-2.0
+
+// Path to a library.
+GLib_LIBRARY:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+GLib_Module_LIBRARY:FILEPATH=/usr/lib64/libgmodule-2.0.so
+
+// Path to a library.
+GLib_Object_LIBRARY:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+GLib_Thread_LIBRARY:FILEPATH=/usr/lib64/libgthread-2.0.so
+
+// Path to a file.
+HarfBuzz_ICU_INCLUDE_DIR:PATH=/usr/include/harfbuzz
+
+// Path to a library.
+HarfBuzz_ICU_LIBRARY:FILEPATH=/usr/lib64/libharfbuzz-icu.so
+
+// Path to a file.
+HarfBuzz_INCLUDE_DIR:PATH=/usr/include/harfbuzz
+
+// Path to a library.
+HarfBuzz_LIBRARY:FILEPATH=/usr/lib64/libharfbuzz.so
+
+// Path to a file.
+Hyphen_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+Hyphen_LIBRARY:FILEPATH=/usr/lib64/libhyphen.so
+
+// ICU data library (debug)
+ICU_DATA_LIBRARY_DEBUG:FILEPATH=ICU_DATA_LIBRARY_DEBUG-NOTFOUND
+
+// ICU data library (release)
+ICU_DATA_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libicudata.so
+
+// ICU derb executable
+ICU_DERB_EXECUTABLE:FILEPATH=/usr/bin/derb
+
+// ICU genbrk executable
+ICU_GENBRK_EXECUTABLE:FILEPATH=/usr/bin/genbrk
+
+// ICU genccode executable
+ICU_GENCCODE_EXECUTABLE:FILEPATH=/usr/bin/genccode
+
+// ICU gencfu executable
+ICU_GENCFU_EXECUTABLE:FILEPATH=/usr/bin/gencfu
+
+// ICU gencmn executable
+ICU_GENCMN_EXECUTABLE:FILEPATH=/usr/bin/gencmn
+
+// ICU gencnval executable
+ICU_GENCNVAL_EXECUTABLE:FILEPATH=/usr/bin/gencnval
+
+// ICU gendict executable
+ICU_GENDICT_EXECUTABLE:FILEPATH=/usr/bin/gendict
+
+// ICU gennorm2 executable
+ICU_GENNORM2_EXECUTABLE:FILEPATH=/usr/bin/gennorm2
+
+// ICU genrb executable
+ICU_GENRB_EXECUTABLE:FILEPATH=/usr/bin/genrb
+
+// ICU gensprep executable
+ICU_GENSPREP_EXECUTABLE:FILEPATH=/usr/bin/gensprep
+
+// ICU i18n library (debug)
+ICU_I18N_LIBRARY_DEBUG:FILEPATH=ICU_I18N_LIBRARY_DEBUG-NOTFOUND
+
+// ICU i18n library (release)
+ICU_I18N_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libicui18n.so
+
+// ICU icu-config executable
+ICU_ICU-CONFIG_EXECUTABLE:FILEPATH=/usr/bin/icu-config
+
+// ICU icuinfo executable
+ICU_ICUINFO_EXECUTABLE:FILEPATH=/usr/bin/icuinfo
+
+// ICU icupkg executable
+ICU_ICUPKG_EXECUTABLE:FILEPATH=/usr/bin/icupkg
+
+// ICU include directory
+ICU_INCLUDE_DIR:PATH=/usr/include
+
+// ICU makeconv executable
+ICU_MAKECONV_EXECUTABLE:FILEPATH=/usr/bin/makeconv
+
+// ICU Makefile.inc data file
+ICU_MAKEFILE_INC:FILEPATH=/usr/lib64/icu/78.2/Makefile.inc
+
+// ICU pkgdata executable
+ICU_PKGDATA_EXECUTABLE:FILEPATH=/usr/bin/pkgdata
+
+// ICU pkgdata.inc data file
+ICU_PKGDATA_INC:FILEPATH=/usr/lib64/icu/78.2/pkgdata.inc
+
+// ICU uconv executable
+ICU_UCONV_EXECUTABLE:FILEPATH=/usr/bin/uconv
+
+// ICU uc library (debug)
+ICU_UC_LIBRARY_DEBUG:FILEPATH=ICU_UC_LIBRARY_DEBUG-NOTFOUND
+
+// ICU uc library (release)
+ICU_UC_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libicuuc.so
+
+// Path to a file.
+JPEGXL_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+JPEGXL_LIBRARY:FILEPATH=/usr/lib64/libjxl.so
+
+// Path to a file.
+JPEG_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+JPEG_LIBRARY_DEBUG:FILEPATH=JPEG_LIBRARY_DEBUG-NOTFOUND
+
+// Path to a library.
+JPEG_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libjpeg.so
+
+// Path to a file.
+Journald_INCLUDE_DIR:PATH=/usr/include/elogind
+
+// Path to a library.
+Journald_LIBRARY:FILEPATH=/usr/lib64/libelogind.so
+
+// Path to a file.
+LCMS2_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+LCMS2_LIBRARY:FILEPATH=/usr/lib64/liblcms2.so
+
+// Path to a file.
+LIBBACKTRACE_INCLUDE_DIR:PATH=LIBBACKTRACE_INCLUDE_DIR-NOTFOUND
+
+// Path to a library.
+LIBBACKTRACE_LIBRARY:FILEPATH=LIBBACKTRACE_LIBRARY-NOTFOUND
+
+// Absolute path to install executables executed by the library
+LIBEXEC_INSTALL_DIR:PATH=/usr/local/libexec/wpe-webkit-2.0
+
+// Path to a program.
+LIBGCRYPTCONFIG_SCRIPT:FILEPATH=/usr/bin/libgcrypt-config
+
+// Path to a file.
+LIBXML2_INCLUDE_DIR:PATH=/usr/include/libxml2
+
+// Path to a library.
+LIBXML2_LIBRARY:FILEPATH=/usr/lib64/libxml2.so
+
+// Path to a program.
+LIBXML2_XMLLINT_EXECUTABLE:FILEPATH=/usr/bin/xmllint
+
+// Path to a file.
+LIBXSLT_EXSLT_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+LIBXSLT_EXSLT_LIBRARY:FILEPATH=/usr/lib64/libexslt.so
+
+// Path to a file.
+LIBXSLT_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+LIBXSLT_LIBRARY:FILEPATH=/usr/lib64/libxslt.so
+
+// Path to a program.
+LIBXSLT_XSLTPROC_EXECUTABLE:FILEPATH=/usr/bin/xsltproc
+
+// Absolute path to library installation directory
+LIB_INSTALL_DIR:PATH=/usr/local/lib64
+
+// Path to a file.
+LibDRM_INCLUDE_DIR:PATH=/usr/include/libdrm
+
+// Path to a library.
+LibDRM_LIBRARY:FILEPATH=/usr/lib64/libdrm.so
+
+// Path to a file.
+LibGcrypt_GpgError_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+LibGcrypt_GpgError_LIBRARY:FILEPATH=/usr/lib64/libgpg-error.so
+
+// Path to a file.
+LibGcrypt_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+LibGcrypt_LIBRARY:FILEPATH=/usr/lib64/libgcrypt.so
+
+// Path to a program.
+PERL_EXECUTABLE:FILEPATH=/usr/bin/perl
+
+// Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+// pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
+// Path to a library.
+PNG_LIBRARY_DEBUG:FILEPATH=PNG_LIBRARY_DEBUG-NOTFOUND
+
+// Path to a library.
+PNG_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libpng.so
+
+// Path to a file.
+PNG_PNG_INCLUDE_DIR:PATH=/usr/include
+
+// choose which WebKit port to build (one of GTK;JSCOnly;Mac;PlayStation;WPE;Win)
+PORT:STRING=WPE
+
+// Path to the Python interpreter
+PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3.14
+
+// The Ruby arch header dir (2.0+)
+Ruby_ARCHHDR_DIR:PATH=/usr/include/ruby-3.2.0/x86_64-linux
+
+// The Ruby arch dir
+Ruby_ARCH_DIR:PATH=/usr/lib64/ruby/3.2.0/x86_64-linux
+
+// Path to a file.
+Ruby_CONFIG_INCLUDE_DIR:PATH=/usr/include/ruby-3.2.0/x86_64-linux
+
+// Path to a program.
+Ruby_EXECUTABLE:FILEPATH=/usr/bin/ruby
+
+// Vendor Ruby is available
+Ruby_HAS_VENDOR_RUBY:BOOL=
+
+// The Ruby header dir (1.9+)
+Ruby_HDR_DIR:PATH=/usr/include/ruby-3.2.0
+
+// Path to a file.
+Ruby_INCLUDE_DIR:PATH=/usr/include/ruby-3.2.0
+
+// Path to a library.
+Ruby_LIBRARY:FILEPATH=/usr/lib64/libruby32.so
+
+// The Ruby ruby-lib dir
+Ruby_RUBY_LIB_DIR:PATH=/usr/lib64/ruby/3.2.0
+
+// The Ruby site arch dir
+Ruby_SITEARCH_DIR:PATH=/usr/lib64/ruby/site_ruby/3.2.0/x86_64-linux
+
+// The Ruby site lib dir
+Ruby_SITELIB_DIR:PATH=/usr/lib64/ruby/site_ruby/3.2.0
+
+// The Ruby vendor arch dir
+Ruby_VENDORARCH_DIR:PATH=
+
+// The Ruby vendor lib dir
+Ruby_VENDORLIB_DIR:PATH=
+
+// The Ruby major version
+Ruby_VERSION_MAJOR:PATH=3
+
+// The Ruby minor version
+Ruby_VERSION_MINOR:PATH=2
+
+// The Ruby patch version
+Ruby_VERSION_PATCH:PATH=9
+
+// generate an installation rule to install the built JavaScript shell
+SHOULD_INSTALL_JS_SHELL:BOOL=OFF
+
+// Path to a file.
+SQLite3_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+SQLite3_LIBRARY:FILEPATH=/usr/lib64/libsqlite3.so
+
+// Path to a file.
+Soup3_INCLUDE_DIR:PATH=/usr/include/libsoup-3.0
+
+// Path to a library.
+Soup3_LIBRARY:FILEPATH=/usr/lib64/libsoup-3.0.so
+
+// Path to a program.
+UNIFDEF_EXECUTABLE:FILEPATH=/usr/bin/unifdef
+
+// Branding to add to user agent string
+USER_AGENT_BRANDING:STRING=
+
+// Support 64 KB userspace page size (reduces security and performance)
+USE_64KB_PAGE_BLOCK:BOOL=OFF
+
+// Use Apple's internal ICU
+USE_APPLE_ICU:BOOL=OFF
+
+// Whether to enable usage of ATK.
+USE_ATK:BOOL=ON
+
+// Toggle support for AVIF images.
+USE_AVIF:BOOL=ON
+
+// Toggle experimental support for 32-bit JSValues
+USE_COMPRESSED_HEAP:BOOL=OFF
+
+// Enable lightweight run-time assertions in the C++ standard library
+USE_CXX_STDLIB_ASSERTIONS:BOOL=ON
+
+// Whether to enable external holepunch
+USE_EXTERNAL_HOLEPUNCH:BOOL=OFF
+
+// Whether to enable usage of Flite for speech synthesis.
+USE_FLITE:BOOL=ON
+
+// Whether to enable usage of GBM.
+USE_GBM:BOOL=ON
+
+// Whether to enable features that require GStreamer
+USE_GSTREAMER:BOOL=ON
+
+// Whether to enable support for static GStreamer builds
+USE_GSTREAMER_FULL:BOOL=OFF
+
+// Whether to enable support for GStreamer GL
+USE_GSTREAMER_GL:BOOL=ON
+
+// Whether to enable support for MPEG-TS
+USE_GSTREAMER_MPEGTS:BOOL=OFF
+
+// 
+USE_GSTREAMER_WEBRTC:BOOL=OFF
+
+// Toggle IsoMalloc support
+USE_ISO_MALLOC:BOOL=ON
+
+// Toggle support for JPEG XL images
+USE_JPEGXL:BOOL=ON
+
+// Toggle support for image color management using libcms2
+USE_LCMS:BOOL=ON
+
+// Whether to enable usage of libbacktrace.
+USE_LIBBACKTRACE:BOOL=ON
+
+// Whether to enable usage of libdrm.
+USE_LIBDRM:BOOL=ON
+
+// Whether to enable the default automatic hyphenation implementation.
+USE_LIBHYPHEN:BOOL=ON
+
+// Whether to enable support for librice
+USE_LIBRICE:BOOL=OFF
+
+// Use PGO profile data for optimization (set PGO_PROFILE_PATH)
+USE_PGO_PROFILE:BOOL=OFF
+
+// Whether to use Skia instead of Cairo.
+USE_SKIA:BOOL=ON
+
+// Whether to use Skia image encoders
+USE_SKIA_ENCODERS:BOOL=ON
+
+// Whether to use the Skia built-in support for OpenType SVG fonts.
+USE_SKIA_OPENTYPE_SVG:BOOL=ON
+
+// Whether to enable usage of LibSpiel for speech synthesis.
+USE_SPIEL:BOOL=OFF
+
+// Whether to use libsysprof-capture for tracing.
+USE_SYSPROF_CAPTURE:BOOL=ON
+
+// Toggle system allocator instead of WebKit's custom allocator
+USE_SYSTEM_MALLOC:BOOL=OFF
+
+// Whether to use a system-provided libsysprof-capture
+USE_SYSTEM_SYSPROF_CAPTURE:BOOL=ON
+
+// Whether to use a system-provided unifdef
+USE_SYSTEM_UNIFDEF:BOOL=ON
+
+// Produce all static libraries as thin archives
+USE_THIN_ARCHIVES:BOOL=ON
+
+// Toggle support for WOFF2 Web Fonts through libwoff2
+USE_WOFF2:BOOL=ON
+
+// Path to a library.
+WOFF2_DEC_LIBRARY:FILEPATH=/usr/lib64/libwoff2dec.so
+
+// Path to a file.
+WOFF2_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+WOFF2_LIBRARY:FILEPATH=/usr/lib64/libwoff2common.so
+
+// Path to a file.
+WPE_INCLUDE_DIR:PATH=/usr/include/wpe-1.0
+
+// Path to a library.
+WPE_LIBRARY:FILEPATH=/usr/lib64/libwpe-1.0.so
+
+// Path to a library.
+WebP_DEMUX_LIBRARY:FILEPATH=/usr/lib64/libwebpdemux.so
+
+// Path to a file.
+WebP_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+WebP_LIBRARY:FILEPATH=/usr/lib64/libwebp.so
+
+// Path to a file.
+ZLIB_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
+
+// Path to a library.
+ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libz.so
+
+// The Ruby lib dir
+_Ruby_POSSIBLE_LIB_DIR:PATH=/usr/lib64
+
+// Path to a library.
+pkgcfg_lib_PC_ATK_BRIDGE_atk-bridge-2.0:FILEPATH=/usr/lib64/libatk-bridge-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_ATK_atk-1.0:FILEPATH=/usr/lib64/libatk-1.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_ATK_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_ATK_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_AVIF_avif:FILEPATH=/usr/lib64/libavif.so
+
+// Path to a library.
+pkgcfg_lib_PC_Epoxy_epoxy:FILEPATH=/usr/lib64/libepoxy.so
+
+// Path to a library.
+pkgcfg_lib_PC_GBM_gbm:FILEPATH=/usr/lib64/libgbm.so
+
+// Path to a library.
+pkgcfg_lib_PC_GCRYPT_gcrypt:FILEPATH=/usr/lib64/libgcrypt.so
+
+// Path to a library.
+pkgcfg_lib_PC_GI_girepository-1.0:FILEPATH=/usr/lib64/libgirepository-1.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GI_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GI_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_GioUnix_gio-2.0:FILEPATH=/usr/lib64/libgio-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_GioUnix_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_GioUnix_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Gio_gio-2.0:FILEPATH=/usr/lib64/libgio-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Gio_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Gio_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Module_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Module_gmodule-2.0:FILEPATH=/usr/lib64/libgmodule-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Object_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Object_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Thread_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_Thread_gthread-2.0:FILEPATH=/usr/lib64/libgthread-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GLib_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_GPGERROR_gpg-error:FILEPATH=/usr/lib64/libgpg-error.so
+
+// Path to a library.
+pkgcfg_lib_PC_HARFBUZZ_ICU_harfbuzz:FILEPATH=/usr/lib64/libharfbuzz.so
+
+// Path to a library.
+pkgcfg_lib_PC_HARFBUZZ_ICU_harfbuzz-icu:FILEPATH=/usr/lib64/libharfbuzz-icu.so
+
+// Path to a library.
+pkgcfg_lib_PC_HARFBUZZ_harfbuzz:FILEPATH=/usr/lib64/libharfbuzz.so
+
+// Path to a library.
+pkgcfg_lib_PC_JPEGXL_jxl:FILEPATH=/usr/lib64/libjxl.so
+
+// Path to a library.
+pkgcfg_lib_PC_LCMS2_lcms2:FILEPATH=/usr/lib64/liblcms2.so
+
+// Path to a library.
+pkgcfg_lib_PC_LCMS2_lcms2_fast_float:FILEPATH=/usr/lib64/liblcms2_fast_float.so
+
+// Path to a library.
+pkgcfg_lib_PC_LCMS2_lcms2_threaded:FILEPATH=/usr/lib64/liblcms2_threaded.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBDRM_drm:FILEPATH=/usr/lib64/libdrm.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBXML_xml2:FILEPATH=/usr/lib64/libxml2.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBXSLT_EXSLT_exslt:FILEPATH=/usr/lib64/libexslt.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBXSLT_EXSLT_xml2:FILEPATH=/usr/lib64/libxml2.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBXSLT_EXSLT_xslt:FILEPATH=/usr/lib64/libxslt.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBXSLT_xml2:FILEPATH=/usr/lib64/libxml2.so
+
+// Path to a library.
+pkgcfg_lib_PC_LIBXSLT_xslt:FILEPATH=/usr/lib64/libxslt.so
+
+// Path to a library.
+pkgcfg_lib_PC_SQLite3_sqlite3:FILEPATH=/usr/lib64/libsqlite3.so
+
+// Path to a library.
+pkgcfg_lib_PC_SYSTEMD_elogind:FILEPATH=/usr/lib64/libelogind.so
+
+// Path to a library.
+pkgcfg_lib_PC_Soup3_gio-2.0:FILEPATH=/usr/lib64/libgio-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_Soup3_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_Soup3_gmodule-2.0:FILEPATH=/usr/lib64/libgmodule-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_Soup3_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_Soup3_soup-3.0:FILEPATH=/usr/lib64/libsoup-3.0.so
+
+// Path to a library.
+pkgcfg_lib_PC_Tasn1_tasn1:FILEPATH=/usr/lib64/libtasn1.so
+
+// Path to a library.
+pkgcfg_lib_PC_WEBP_webp:FILEPATH=/usr/lib64/libwebp.so
+
+// Path to a library.
+pkgcfg_lib_PC_WOFF2_DEC_brotlidec:FILEPATH=/usr/lib64/libbrotlidec.so
+
+// Path to a library.
+pkgcfg_lib_PC_WOFF2_DEC_woff2dec:FILEPATH=/usr/lib64/libwoff2dec.so
+
+// Path to a library.
+pkgcfg_lib_PC_WOFF2_woff2common:FILEPATH=/usr/lib64/libwoff2common.so
+
+// Path to a library.
+pkgcfg_lib_PC_WPE_wpe-1.0:FILEPATH=/usr/lib64/libwpe-1.0.so
+
+// Path to a library.
+pkgcfg_lib_XkbCommon_xkbcommon:FILEPATH=/usr/lib64/libxkbcommon.so
+
+root@gentoo   /var/tmp/portage/net-libs/wpewebkit-2.52.3/work/wpewebkit-2.52.3
+1 # 
+1 # 

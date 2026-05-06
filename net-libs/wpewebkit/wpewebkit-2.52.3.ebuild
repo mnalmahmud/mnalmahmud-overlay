@@ -1,7 +1,9 @@
 EAPI=8
 
+CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python3_{10..14} )
-inherit cmake flag-o-matic python-any-r1 toolchain-funcs
+USE_RUBY="ruby32 ruby33 ruby34 ruby40"
+inherit cmake flag-o-matic python-any-r1 ruby-single toolchain-funcs
 
 DESCRIPTION="Embeddable web content engine"
 HOMEPAGE="https://wpewebkit.org"
@@ -34,13 +36,17 @@ LICENSE="
 "
 SLOT="2.0"
 KEYWORDS="-* ~amd64 ~arm64"
-IUSE="-debug -doc +introspection -minibrowser -sysprof systemd"
+IUSE="+accessibility debug doc examples experimental +gamepad +gstreamer +introspection +jpegxl qt +sandbox sysprof systemd test +webdriver +webrtc X"
+REQUIRED_USE="webrtc? ( gstreamer )"
+
+# doc X
 
 BDEPEND="
 	${PYTHON_DEPS}
-	dev-lang/ruby
+	${RUBY_DEPS}
 	dev-build/cmake
 	dev-build/ninja
+	dev-lang/perl
 	introspection? ( dev-libs/gobject-introspection )
 	dev-libs/wayland-protocols
 	doc? ( dev-util/gi-docgen )
@@ -53,73 +59,105 @@ BDEPEND="
 "
 
 RDEPEND="
-    app-accessibility/at-spi2-core:2
+	accessibility? (
+	    app-accessibility/at-spi2-core
+	)
 	dev-db/sqlite:3
-	dev-libs/atk
 	dev-libs/expat
-	dev-libs/glib:2
+	>=dev-libs/glib-2.80.0:2
 	dev-libs/hyphen
-	dev-libs/icu:=
-	dev-libs/libgcrypt:=
+	>=dev-libs/icu-75:=
+	dev-libs/libgcrypt
 	dev-libs/libinput
-	dev-libs/libtasn1:=
-	dev-libs/libxml2:2
-	dev-libs/libxslt
+	gamepad? ( >=dev-libs/libmanette-0.2 )
+	dev-libs/libtasn1
+	>=dev-libs/libxml2-2.13.9:=
+	>=dev-libs/libxslt-1.1.40
+	webrtc? (
+		dev-libs/openssl
+		>=media-plugins/gst-plugins-webrtc-1.24.10:1.0
+	)
 	dev-libs/wayland
+	qt? (
+		dev-qt/qtcore:6
+		dev-qt/qtdeclarative:6
+		dev-qt/qtgui:6
+		dev-qt/qttest:6
+		>=gui-libs/wpebackend-fdo-1.0
+	)
 	sysprof? ( dev-util/sysprof-capture:4 )
 	gui-libs/libwpe:1.0
-	gui-libs/wpebackend-fdo:1.0
 	media-fonts/font-misc-misc
-	media-libs/fontconfig
-	media-libs/freetype
-	media-libs/gst-plugins-bad:1.0
-	media-libs/gst-plugins-base:1.0
-	media-libs/gstreamer:1.0
-	media-libs/harfbuzz:=[icu]
+	>=media-libs/fontconfig-2.16.0:=
+	>=media-libs/freetype-2.14.0:=
+	gstreamer? (
+		>=media-libs/gstreamer-1.24.10:1.0
+		>=media-libs/gst-plugins-bad-1.24.10:1.0
+		>=media-libs/gst-plugins-base-1.24.10:1.0[egl]
+        >=media-plugins/gst-plugins-libav-1.24.10:1.0
+		>=media-plugins/gst-plugins-opus-1.24.10:1.0
+		>=media-plugins/gst-plugins-vpx-1.24.10:1.0
+	)
+	>=media-libs/harfbuzz-12.2.0:=[icu(+)]
 	media-libs/lcms:2
-	media-libs/libavif:=
-	media-libs/libepoxy
-	media-libs/libjpeg-turbo:=
-	media-libs/libjxl:=
+	media-libs/libavif
+	>=media-libs/libepoxy-1.5.5:=
+	media-libs/libjpeg-turbo
+	jpegxl? ( media-libs/libjxl )
 	media-libs/libpng:=
 	media-libs/libwebp:=
 	media-libs/mesa
-	media-libs/openjpeg:2=
-	media-libs/woff2
+	>=media-libs/woff2-1.0.2
 	net-libs/libsoup:3.0
-	sys-apps/bubblewrap
+	sandbox? ( sys-apps/bubblewrap )
     systemd? ( sys-apps/systemd )
 	sys-apps/xdg-dbus-proxy
 	sys-libs/libseccomp
 	sys-libs/zlib
-	x11-libs/cairo
+	>=x11-libs/cairo-1.18.0:=[X?]
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
 "
 DEPEND="${RDEPEND}"
 
 src_configure() {
+    filter-lto
+
     if ! use debug; then
         append-cppflags -DNDEBUG
     fi
 	local mycmakeargs=(
+	    -DENABLE_ACCESSIBILITY_ISOLATED_TREE=$(usex accessibility ON OFF)
+	    -DENABLE_API_TESTS=$(usex test ON OFF)
+		-DENABLE_BUBBLEWRAP_SANDBOX=$(usex sandbox ON OFF)
 		-DENABLE_DOCUMENTATION=$(usex doc ON OFF)
+		-DENABLE_EXPERIMENTAL_FEATURES=$(usex experimental ON OFF)
+		-DENABLE_GAMEPAD=$(usex gamepad ON OFF)
 		-DENABLE_INTROSPECTION=$(usex introspection ON OFF)
-		-DENABLE_MINIBROWSER=$(usex minibrowser ON OFF)
-		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof ON OFF)
 		-DENABLE_JOURNALD_LOG=$(usex systemd ON OFF)
+		-DENABLE_LAYOUT_TESTS=$(usex test ON OFF)
+		-DENABLE_MINIBROWSER=$(usex examples ON OFF)
 		-DENABLE_SPEECH_SYNTHESIS=OFF
+		-DENABLE_VIDEO=$(usex gstreamer ON OFF)
+		-DENABLE_WEBDRIVER=$(usex webdriver ON OFF)
+		-DENABLE_WEB_AUDIO=$(usex gstreamer ON OFF)
+		-DENABLE_WEB_RTC=$(usex webrtc ON OFF)
+		-DENABLE_MEDIA_STREAM=$(usex webrtc ON OFF)
 		-DENABLE_WPE_PLATFORM=ON
+		-DENABLE_WPE_QT_API=$(usex qt ON OFF)
+		-DENABLE_XSLT=ON
 		-DPORT=WPE
+		-DSHOULD_INSTALL_JS_SHELL=ON
+		-DRUBY_EXECUTABLE="${RUBY}"
+		-DUSE_ATK=$(usex accessibility ON OFF)
 		-DUSE_FLITE=OFF
+		-DUSE_JPEGXL=$(usex jpegxl ON OFF)
 		-DUSE_LIBBACKTRACE=OFF
+		-DUSE_SYSTEM_SYSPROF_CAPTURE=$(usex sysprof ON OFF)
 	)
 
-    CC=${CHOST}-clang
-    CXX=${CHOST}-clang++
-    AR=llvm-ar
-    NM=llvm-nm
-    RANLIB=llvm-ranlib
+    CC=${CHOST}-clang CXX=${CHOST}-clang++
+    AR=llvm-ar NM=llvm-nm RANLIB=llvm-ranlib
     tc-export CC CXX AR NM RANLIB
     append-ldflags "-fuse-ld=lld"
 
