@@ -45,12 +45,12 @@ REQUIRED_USE="webrtc? ( gstreamer )"
 BDEPEND="
 	${PYTHON_DEPS}
 	${RUBY_DEPS}
+	doc? ( dev-util/gi-docgen )
+	introspection? ( dev-libs/gobject-introspection )
 	dev-build/cmake
 	dev-build/ninja
 	dev-lang/perl
-	introspection? ( dev-libs/gobject-introspection )
 	dev-libs/wayland-protocols
-	doc? ( dev-util/gi-docgen )
 	dev-util/gperf
 	dev-util/unifdef
 	llvm-core/clang
@@ -64,34 +64,8 @@ RDEPEND="
 	accessibility? (
 	    app-accessibility/at-spi2-core
 	)
-	dev-db/sqlite:3
-	dev-libs/expat
-	>=dev-libs/glib-2.70.0:2
-	dev-libs/hyphen
-	>=dev-libs/icu-70.1:=
-	>=dev-libs/libgcrypt-1.7.0
-	>=dev-libs/libinput-1.19.0
+	jpegxl? ( >=media-libs/libjxl-0.7.0 )
 	gamepad? ( >=dev-libs/libmanette-0.2.4 )
-	dev-libs/libtasn1
-	>=dev-libs/libxml2-2.9.13:=
-	>=dev-libs/libxslt-1.1.13
-	webrtc? (
-		dev-libs/openssl
-		>=media-plugins/gst-plugins-webrtc-1.24.10:1.0
-	)
-	>=dev-libs/wayland-1.20
-	qt? (
-		dev-qt/qtcore:6
-		dev-qt/qtdeclarative:6
-		dev-qt/qtgui:6
-		dev-qt/qttest:6
-		>=gui-libs/wpebackend-fdo-1.0
-	)
-	sysprof? ( dev-util/sysprof-capture:4 )
-	gui-libs/libwpe:1.0
-	media-fonts/font-misc-misc
-	>=media-libs/fontconfig-2.16.0:=
-	>=media-libs/freetype-2.14.0:=
 	gstreamer? (
 		>=media-libs/gstreamer-1.18.4:1.0
 		>=media-libs/gst-plugins-bad-1.18.4:1.0
@@ -100,23 +74,49 @@ RDEPEND="
 		>=media-plugins/gst-plugins-opus-1.18.4:1.0
 		>=media-plugins/gst-plugins-vpx-1.18.4:1.0
 	)
+	qt? (
+		dev-qt/qtcore:6
+		dev-qt/qtdeclarative:6
+		dev-qt/qtgui:6
+		dev-qt/qttest:6
+		>=gui-libs/wpebackend-fdo-1.0
+	)
+	sandbox? ( sys-apps/bubblewrap )
+	sysprof? ( dev-util/sysprof-capture:4 )
+    systemd? ( sys-apps/systemd )
+	webrtc? (
+		dev-libs/openssl
+		>=media-plugins/gst-plugins-webrtc-1.24.10:1.0
+	)
+	>=dev-libs/glib-2.70.0:2
+	>=dev-libs/icu-70.1:=
+	>=dev-libs/libgcrypt-1.7.0
+	>=dev-libs/libinput-1.19.0
+	>=dev-libs/libxml2-2.9.13:=
+	>=dev-libs/libxslt-1.1.13
+	>=dev-libs/wayland-1.20
+	>=media-libs/fontconfig-2.16.0:=
+	>=media-libs/freetype-2.14.0:=
 	>=media-libs/harfbuzz-2.7.4:=[icu(+)]
-	media-libs/lcms:2
 	>=media-libs/libavif-0.9.0
 	>=media-libs/libepoxy-1.5.4:=
+	>=media-libs/woff2-1.0.2
+	>=net-libs/libsoup-3.0.0:3.0
+	>=x11-libs/cairo-1.18.0:=[X?]
+	dev-db/sqlite:3
+	dev-libs/expat
+	dev-libs/hyphen
+	dev-libs/libtasn1
+	gui-libs/libwpe:1.0
+	media-fonts/font-misc-misc
+	media-libs/lcms:2
 	media-libs/libjpeg-turbo
-	jpegxl? ( >=media-libs/libjxl-0.7.0 )
 	media-libs/libpng:=
 	media-libs/libwebp:=
 	media-libs/mesa
-	>=media-libs/woff2-1.0.2
-	>=net-libs/libsoup-3.0.0:3.0
-	sandbox? ( sys-apps/bubblewrap )
-    systemd? ( sys-apps/systemd )
 	sys-apps/xdg-dbus-proxy
 	sys-libs/libseccomp
 	sys-libs/zlib
-	>=x11-libs/cairo-1.18.0:=[X?]
 	x11-libs/libdrm
 	x11-libs/libxkbcommon
 "

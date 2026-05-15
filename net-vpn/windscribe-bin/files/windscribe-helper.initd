@@ -7,6 +7,8 @@ command_background="true"
 pidfile="/run/windscribe-helper.pid"
 
 depend() {
-	need net
+	use net
+	after network
+	after firewall
 	use dns
 }

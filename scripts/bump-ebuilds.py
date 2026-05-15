@@ -335,10 +335,10 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
             has_v_prefix, prefer_releases = detect_flags(src_uri_line)
             if prefer_releases:
                 info("querying GitHub releases/latest …")
-                upstream_tag = latest_release(upstream_id, github_token)
+                upstream_tag = latest_github_release(upstream_id, github_token)
             if not upstream_tag:
                 info("querying GitHub tags …")
-                upstream_tag = latest_stable_tag(upstream_id, github_token)
+                upstream_tag = latest_github_stable_tag(upstream_id, github_token)
 
         case "gitlab":
             has_v_prefix, prefer_releases = detect_flags(src_uri_line)
