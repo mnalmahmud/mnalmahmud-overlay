@@ -97,8 +97,10 @@ src_install() {
 	newbashcomp completions/bash/please please
 	bashcomp_alias please pleaseedit
 
-	insinto /usr/share/zsh/site-functions
+	insinto /usr/share/zsh/site-function
 	doins completions/zsh/_please
+	fowners root:root /usr/share/zsh/site-functions/_please
+	fperms 0644 /usr/share/zsh/site-functions/_please
 
 	pamd_mimic_system please auth account session
 	pamd_mimic_system pleaseedit auth account session
