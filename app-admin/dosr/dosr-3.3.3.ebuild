@@ -249,7 +249,7 @@ src_test() {
 src_install() {
     cargo_src_install
 
-    pamd_mimic system-auth dosr auth account session
+    pamd_mimic_system dosr auth account session
 
     insinto /etc/security
     newins resources/rootasrole.json rootasrole.json
