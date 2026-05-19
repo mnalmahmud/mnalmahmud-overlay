@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit ecm
+inherit cmake ecm
 
 DESCRIPTION="A modern fullscreen application launcher for KDE Plasma"
 HOMEPAGE="https://github.com/xarbit/plasma6-applet-appgrid"
