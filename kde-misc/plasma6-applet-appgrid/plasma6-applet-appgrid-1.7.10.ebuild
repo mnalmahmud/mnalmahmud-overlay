@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake ecm
+inherit ecm
 
 DESCRIPTION="A modern fullscreen application launcher for KDE Plasma"
 HOMEPAGE="https://github.com/xarbit/plasma6-applet-appgrid"
@@ -17,9 +17,11 @@ DEPEND="
 	kde-frameworks/kcmutils:6
 	kde-frameworks/kcoreaddons:6
 	kde-frameworks/kdeclarative:6
+	kde-frameworks/ki18n:6
 	kde-frameworks/kiconthemes:6
 	kde-frameworks/kio:6
 	kde-frameworks/kirigami:6
+	kde-frameworks/kpackage:6
 	kde-frameworks/krunner:6
 	kde-frameworks/kservice:6
 	kde-frameworks/ksvg:6
@@ -30,6 +32,7 @@ DEPEND="
 RDEPEND="${DEPEND}
 	kde-plasma/plasma-workspace:6
 "
+
 BDEPEND="
-	kde-frameworks/extra-cmake-modules:0
+    sys-devel/gettext
 "
