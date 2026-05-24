@@ -18,7 +18,7 @@ RESTRICT="mirror strip"
 QA_PREBUILT="opt/windscribe/*"
 RDEPEND="
 	acct-group/windscribe
-	app-admin/sudo
+	|| ( app-admin/sudo app-admin/sudo-rs )
 	dev-libs/glib:2
 	media-libs/fontconfig
 	media-libs/freetype
