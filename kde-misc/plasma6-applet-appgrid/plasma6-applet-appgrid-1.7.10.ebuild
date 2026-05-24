@@ -11,6 +11,7 @@ SRC_URI="https://github.com/xarbit/plasma6-applet-appgrid/archive/refs/tags/v${P
 LICENSE="GPL-2+"
 SLOT="6"
 KEYWORDS="~amd64 ~arm64"
+IUSE="test X"
 DEPEND="
 	dev-qt/qtbase:6
 	dev-qt/qtdeclarative:6
@@ -25,14 +26,22 @@ DEPEND="
 	kde-frameworks/krunner:6
 	kde-frameworks/kservice:6
 	kde-frameworks/ksvg:6
-	kde-frameworks/kwindowsystem:6
 	kde-plasma/layer-shell-qt:6
 	kde-plasma/libplasma:6
 "
 RDEPEND="${DEPEND}
-	kde-plasma/plasma-workspace:6
+	kde-plasma/plasma-workspace:6[X?]
 "
 
 BDEPEND="
     sys-devel/gettext
 "
+
+src_configure() {
+	local mycmakeargs=(
+		-DBUILD_TESTING=$(usex test ON OFF)
+		-DENABLE_X11=$(usex X ON OFF)
+	)
+	
+	cmake_src_configure
+}

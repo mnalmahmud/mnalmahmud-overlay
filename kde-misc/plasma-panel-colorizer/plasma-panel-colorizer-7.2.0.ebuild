@@ -13,6 +13,7 @@ SRC_URI="https://github.com/luisbocanegra/${PN}/archive/v${PV}.tar.gz -> ${P}.ta
 LICENSE="GPL-3+"
 SLOT="6"
 KEYWORDS="~amd64 ~arm64"
+IUSE="+plugin"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="
 	kde-plasma/libplasma:6
@@ -41,8 +42,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+        -DBUILD_PLUGIN=$(usex plugin ON OFF)
 		-DINSTALL_PLASMOID=ON
-		-DBUILD_PLUGIN=ON
 	)
 	cmake_src_configure
 }
