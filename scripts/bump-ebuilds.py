@@ -4,6 +4,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import urllib.error
 import urllib.parse
@@ -20,8 +21,11 @@ GITHUB_API = "https://api.github.com"
 GITLAB_API = "https://gitlab.com/api/v4"
 OVERLAY_DIR = Path(__file__).resolve().parent.parent
 
+_github_rate_limited = False
+
 def log(msg):   print(f"[bump] {msg}", flush=True)
 def info(msg):  print(f"[bump]   INFO  {msg}", flush=True)
+def warn(msg):  print(f"[bump]   WARN  {msg}", flush=True)
 def skip(msg):  print(f"[bump]   SKIP  {msg}", flush=True)
 def ok(msg):    print(f"[bump]   OK    {msg}", flush=True)
 def bump(msg):  print(f"[bump]   BUMP  {msg}", flush=True)
@@ -33,14 +37,26 @@ def http_get_json(url: str) -> dict | list:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def github_get(url: str, token: str) -> dict | list:
+def github_get(url: str, token: str) -> dict | list | None:
+    global _github_rate_limited
     headers = {"Accept": "application/vnd.github.v3+json",
                "User-Agent": "auto-ebuild-bump/1.2"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
     req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        if exc.code == 403 and "rate limit" in str(exc).lower():
+            if not _github_rate_limited:
+                _github_rate_limited = True
+                warn("GitHub API rate limit exceeded (HTTP 403). Falling back to web/git.")
+        elif exc.code == 401:
+            err(f"GitHub API authorization failed (HTTP 401) for {url}. Check GITHUB_TOKEN.")
+        return None
+    except urllib.error.URLError:
+        return None
 
 
 def gitlab_get(url: str, token: str) -> dict | list:
@@ -59,9 +75,28 @@ def find_packages(overlay_dir: Path) -> list[Path]:
     return sorted(dirs)
 
 
+def extract_ebuild_var(content: str, var_name: str) -> str:
+    """Extract full content of an ebuild variable, supporting multiline strings."""
+    m = re.search(rf'^\s*{var_name}\s*=\s*(["\'])(.*?)\1', content, re.DOTALL | re.MULTILINE)
+    if m:
+        return m.group(2)
+    m = re.search(rf'^\s*{var_name}\s*=\s*\((.*?)\)', content, re.DOTALL | re.MULTILINE)
+    if m:
+        return m.group(1)
+    m = re.search(rf'^\s*{var_name}\s*=\s*(\S+)', content, re.MULTILINE)
+    if m:
+        return m.group(1)
+    return ""
+
+
 def extract_github_repo(text: str) -> str:
-    m = re.search(r'https://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)', text)
-    return re.sub(r'\.git$', '', m.group(1)) if m else ""
+    m = re.search(r'https?://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)', text)
+    if m:
+        return re.sub(r'\.git$', '', m.group(1))
+    m = re.search(r'https?://([A-Za-z0-9_.-]+)\.github\.io/([A-Za-z0-9_.-]+)', text)
+    if m:
+        return f"{m.group(1)}/{m.group(2)}"
+    return ""
 
 
 def extract_gitlab_repo(text: str) -> str:
@@ -132,29 +167,68 @@ def version_gt(v1: str, v2: str) -> bool:
 def version_sort_key(v: str):
     return _fallback_version_key(v)
 
-def latest_github_release(repo: str, token: str) -> str:
-    url = f"{GITHUB_API}/repos/{repo}/releases/latest"
+def latest_github_release_web(repo: str) -> str:
+    """Fallback to GitHub web releases/latest redirect (not rate-limited)."""
+    url = f"https://github.com/{repo}/releases/latest"
+    req = urllib.request.Request(url, headers={"User-Agent": "auto-ebuild-bump/1.2"})
     try:
-        data = github_get(url, token)
-        tag_name = data.get("tag_name", "")
-        if data.get("prerelease") or _PRERELEASE_RE.search(tag_name):
-            return ""
-        return tag_name
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            final_url = resp.geturl()
+            m = re.search(r'/releases/tag/([^/]+)$', final_url)
+            if m:
+                tag = urllib.parse.unquote(m.group(1))
+                if not _PRERELEASE_RE.search(tag):
+                    return tag
     except (urllib.error.HTTPError, urllib.error.URLError):
-        return ""
+        pass
+    return ""
+
+def latest_git_tags(repo_url: str) -> list[str]:
+    """Fetch tags via git ls-remote (not subject to GitHub REST API rate limits)."""
+    try:
+        res = subprocess.run(
+            ["git", "ls-remote", "--tags", "--refs", repo_url],
+            capture_output=True,
+            text=True,
+            timeout=20,
+            check=True
+        )
+        tags = []
+        for line in res.stdout.splitlines():
+            parts = line.split("\trefs/tags/")
+            if len(parts) == 2:
+                tags.append(parts[1])
+        return tags
+    except Exception:
+        return []
+
+def latest_github_release(repo: str, token: str) -> str:
+    if not _github_rate_limited:
+        url = f"{GITHUB_API}/repos/{repo}/releases/latest"
+        data = github_get(url, token)
+        if isinstance(data, dict):
+            tag_name = data.get("tag_name", "")
+            if not (data.get("prerelease") or _PRERELEASE_RE.search(tag_name)):
+                if tag_name:
+                    return tag_name
+    return latest_github_release_web(repo)
 
 def latest_github_stable_tag(repo: str, token: str) -> str:
-    url = f"{GITHUB_API}/repos/{repo}/tags?per_page=100"
-    try:
+    names = []
+    if not _github_rate_limited:
+        url = f"{GITHUB_API}/repos/{repo}/tags?per_page=100"
         tags = github_get(url, token)
-        names = [t["name"] for t in tags]
-        stable = [n for n in names if not _PRERELEASE_RE.search(n)]
-        if not stable: stable = names
-        if not stable: return ""
-        stable.sort(key=version_sort_key, reverse=True)
-        return stable[0]
-    except (urllib.error.HTTPError, urllib.error.URLError):
+        if isinstance(tags, list):
+            names = [t["name"] for t in tags if "name" in t]
+    if not names:
+        names = latest_git_tags(f"https://github.com/{repo}.git")
+    if not names:
         return ""
+    stable = [n for n in names if not _PRERELEASE_RE.search(n)]
+    if not stable:
+        stable = names
+    stable.sort(key=version_sort_key, reverse=True)
+    return stable[0]
 
 def latest_gitlab_release(repo: str, token: str) -> str:
     encoded = urllib.parse.quote(repo, safe="")
@@ -236,10 +310,10 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
     log(f"{rel_path}  (current: {current_pv})")
 
     content = latest_ebuild.read_text(encoding="utf-8", errors="replace")
-    homepage_line = "\n".join(l for l in content.splitlines() if re.search(r'^\s*HOMEPAGE\s*=', l, re.I))
-    src_uri_line  = "\n".join(l for l in content.splitlines() if re.search(r'^\s*SRC_URI\s*=',  l, re.I))
+    homepage = extract_ebuild_var(content, "HOMEPAGE")
+    src_uri  = extract_ebuild_var(content, "SRC_URI")
 
-    source_type, upstream_id = detect_upstream(homepage_line, src_uri_line)
+    source_type, upstream_id = detect_upstream(homepage, src_uri)
     if not source_type:
         skip(f"no supported upstream for {pkg_name}")
         return
@@ -277,7 +351,7 @@ def process_package(pkg_dir: Path, github_token: str, gitlab_token: str, bumped_
         return
 
     upstream_pv = upstream_tag
-    has_v_prefix, _ = detect_flags(src_uri_line)    
+    has_v_prefix, _ = detect_flags(src_uri)    
     if upstream_pv.startswith("v") and upstream_pv[1:2].isdigit() and not current_pv.startswith("v"):
         upstream_pv = upstream_pv[1:]
     elif has_v_prefix:
